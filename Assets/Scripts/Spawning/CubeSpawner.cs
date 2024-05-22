@@ -6,6 +6,9 @@ public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject CTemplateObject;
     [SerializeField] private List<GameObject> aObjectList;
+
+    public const string SPAWN_CUBE_VALUE = "SPAWN_CUBE_VALUE";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +28,15 @@ public class CubeSpawner : MonoBehaviour
         //this.SpawnCubeEvent();
     }
 
-    private void SpawnCubeEvent()
+    private void SpawnCubeEvent(Parameters CParam)
     {
-        GameObject CInstance = GameObject.Instantiate(this.CTemplateObject, this.transform);
-        CInstance.SetActive(true);
-        this.aObjectList.Add(CInstance);
+        int nSpawnTotal = CParam.GetIntExtra(SPAWN_CUBE_VALUE, 1);
+        for (int i = 0; i < nSpawnTotal; i++)
+        {
+            GameObject CInstance = GameObject.Instantiate(this.CTemplateObject, this.transform);
+            CInstance.SetActive(true);
+            this.aObjectList.Add(CInstance);
+        }
+       
     }
 }
