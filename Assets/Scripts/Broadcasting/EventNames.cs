@@ -45,7 +45,8 @@ public class EventNames {
 		public const string EXTENDED_TRACK_ON_SCAN = "EXTENDED_TRACK_ON_SCAN";
 		public const string EXTENDED_TRACK_REMOVED = "EXTENDED_TRACK_REMOVED";
 		public const string ON_SPAWN_CUBE = "ON_SPAWN_CUBE";
-	}
+        public const string ON_DESPAWN_CUBE = "ON_DESPAWN_CUBE";
+    }
 
 	public class S18_Events {
 		public const string ON_FIRST_SCAN = "FIRST_TARGET_SCAN";

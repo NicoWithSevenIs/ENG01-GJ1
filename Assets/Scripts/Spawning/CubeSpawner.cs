@@ -14,12 +14,14 @@ public class CubeSpawner : MonoBehaviour
     {
         this.CTemplateObject.SetActive(false);
         EventBroadcaster.Instance.AddObserver(EventNames.X22_Events.ON_SPAWN_CUBE, this.SpawnCubeEvent);
+        EventBroadcaster.Instance.AddObserver(EventNames.X22_Events.ON_DESPAWN_CUBE, this.DespawnCubeEvent);
 
     }
 
     void OnDestroy()
     {
         EventBroadcaster.Instance.RemoveObserver(EventNames.X22_Events.ON_SPAWN_CUBE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.X22_Events.ON_DESPAWN_CUBE);
     }
 
     // Update is called once per frame
@@ -38,5 +40,13 @@ public class CubeSpawner : MonoBehaviour
             this.aObjectList.Add(CInstance);
         }
        
+    }
+
+    private void DespawnCubeEvent()
+    {
+        for (int i = 0; i < this.aObjectList.Count; i++)
+        {
+            GameObject.Destroy(this.aObjectList[i]);
+        }
     }
 }
