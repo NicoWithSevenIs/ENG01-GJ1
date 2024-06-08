@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770332521e42fe04a8f117edd817d9ea, type: 3}
+  m_Name: Blueprint
+  m_EditorClassIdentifier: 
+  blueprints:
+  - model: {fileID: 4432283711900431781, guid: 7b7461ae18f79db4a97266c399c5d9bc, type: 3}
+    dataList:
+    - {fileID: 11400000, guid: 046623b0dca063e46b38595ace66574b, type: 2}
+    - {fileID: 11400000, guid: 8661268088421354790af82b89aea05f, type: 2}
+    - {fileID: 11400000, guid: 86c36972a134d9041bc3359ba6ea14f0, type: 2}
+    - {fileID: 11400000, guid: 210874a153e05684fafe7398d1c866b6, type: 2}
+  - model: {fileID: 491568051804856591, guid: 69ba9545d0d82874b9dae9d42bb2a5ed, type: 3}
+    dataList: []
+  - model: {fileID: 8531081312839940828, guid: 9075eaa1c74caf84a9c61907e4472fce, type: 3}
+    dataList: []
