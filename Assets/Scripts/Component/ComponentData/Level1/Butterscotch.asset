@@ -16,3 +16,6 @@ MonoBehaviour:
   bodyColor: {r: 0.8901961, g: 0.6658667, b: 0.40949017, a: 1}
   borderColor: {r: 0.8901961, g: 0.5882353, b: 0.24313726, a: 1}
   isBuildable: 1
+  accentColor: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 1}
+  componentA: {fileID: 11400000, guid: 210874a153e05684fafe7398d1c866b6, type: 2}
+  componentB: {fileID: 11400000, guid: 8661268088421354790af82b89aea05f, type: 2}

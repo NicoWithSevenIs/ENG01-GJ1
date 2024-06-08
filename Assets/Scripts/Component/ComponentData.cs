@@ -10,31 +10,31 @@ using UnityEngine;
 public class ComponentData : ScriptableObject
 {
 
-    [SerializeField] private string componentName;
+    [SerializeField] internal string componentName;
     public string ComponentName { get { return this.componentName; } }
 
-    [SerializeField] private Color bodyColor = Color.black;
+    [SerializeField] internal Color bodyColor = Color.black;
     public Color BodyColor { get { return this.bodyColor; } } 
 
-    [SerializeField] private Color borderColor = Color.black;
+    [SerializeField] internal Color borderColor = Color.black;
     public Color BorderColor { get { return this.borderColor; } }
-
-    internal Color accentColor = new Color(53f / 255f, 53f / 255f, 53f / 255f);
-    public Color AccentColor { get { return this.accentColor; } }
 
     [SerializeField] internal bool isBuildable = false;
 
     public bool IsBuildable { get { return this.isBuildable; } }
 
-    internal ComponentData componentA;
+   
+    [SerializeField] internal Color accentColor = new Color(53f / 255f, 53f / 255f, 53f / 255f);
+    public Color AccentColor { get { return this.accentColor; } }
+
+
+    [SerializeField] internal ComponentData componentA;
     public ComponentData ComponentA { get { return this.componentA; } }
 
-    internal ComponentData componentB;
+    [SerializeField] internal ComponentData componentB;
     public ComponentData ComponentB { get { return this.componentB; } }
 
 
-  
-   
  
 
 }
@@ -48,8 +48,15 @@ public class ComponentData_Editor : Editor
 
         var script = (ComponentData)target;
 
-        base.OnInspectorGUI();
+        string path = UnityEditor.AssetDatabase.GetAssetPath(script);
 
+        EditorGUI.BeginDisabledGroup(true);
+        script.componentName = EditorGUILayout.TextField("Component Name", Path.GetFileNameWithoutExtension(path));
+        EditorGUI.EndDisabledGroup();
+
+        script.bodyColor = EditorGUILayout.ColorField("Body Color", script.bodyColor);
+        script.borderColor = EditorGUILayout.ColorField("Border Color", script.borderColor);
+        script.isBuildable = EditorGUILayout.Toggle("Is Buildable", script.isBuildable);
 
         if (script.isBuildable)
         {
@@ -58,7 +65,8 @@ public class ComponentData_Editor : Editor
 
             script.accentColor = EditorGUILayout.ColorField("Accent Color", script.accentColor);
             script.componentA = EditorGUILayout.ObjectField("Component A", script.componentA, typeof(ComponentData), false) as ComponentData;
-            script.componentB = EditorGUILayout.ObjectField("Component B", script.componentB, typeof(ComponentData), false) as ComponentData;  
+            script.componentB = EditorGUILayout.ObjectField("Component B", script.componentB, typeof(ComponentData), false) as ComponentData;
+      
         }
         else
         {
@@ -67,10 +75,12 @@ public class ComponentData_Editor : Editor
             script.componentB = null;
         }
 
-        if (EditorGUI.EndChangeCheck())
-            AssetDatabase.SaveAssets();
-        
 
+        if (EditorGUI.EndChangeCheck())
+        {
+            EditorUtility.SetDirty(script);
+            AssetDatabase.SaveAssets();
+        }
     }
 }
 

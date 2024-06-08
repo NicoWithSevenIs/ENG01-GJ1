@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 168013188f1e88640bd19083e9daf632, type: 3}
-  m_Name: Aegean
+  m_Name: Bubblegum Pink
   m_EditorClassIdentifier: 
-  componentName: Aegean
-  bodyColor: {r: 0.3617059, g: 0.45017785, b: 0.5058824, a: 1}
-  borderColor: {r: 0.2731765, g: 0.41918802, b: 0.5058824, a: 1}
+  componentName: Bubblegum Pink
+  bodyColor: {r: 0.9607843, g: 0.57358825, b: 0.6331569, a: 1}
+  borderColor: {r: 0.9607843, g: 0.5019608, b: 0.57254905, a: 1}
   isBuildable: 1
-  componentA: {fileID: 11400000, guid: 046623b0dca063e46b38595ace66574b, type: 2}
-  componentB: {fileID: 11400000, guid: 8661268088421354790af82b89aea05f, type: 2}
+  accentColor: {r: 1, g: 1, b: 1, a: 1}
+  componentA: {fileID: 11400000, guid: 86c36972a134d9041bc3359ba6ea14f0, type: 2}
+  componentB: {fileID: 11400000, guid: 07d7f481304ddd24ea46c277724f8ad5, type: 2}
