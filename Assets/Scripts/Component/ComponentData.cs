@@ -34,9 +34,6 @@ public class ComponentData : ScriptableObject
     [SerializeField] internal ComponentData componentB;
     public ComponentData ComponentB { get { return this.componentB; } }
 
-
- 
-
 }
 
 [CustomEditor(typeof(ComponentData))]
@@ -66,7 +63,6 @@ public class ComponentData_Editor : Editor
             script.accentColor = EditorGUILayout.ColorField("Accent Color", script.accentColor);
             script.componentA = EditorGUILayout.ObjectField("Component A", script.componentA, typeof(ComponentData), false) as ComponentData;
             script.componentB = EditorGUILayout.ObjectField("Component B", script.componentB, typeof(ComponentData), false) as ComponentData;
-      
         }
         else
         {
@@ -74,7 +70,6 @@ public class ComponentData_Editor : Editor
             script.componentA = null;
             script.componentB = null;
         }
-
 
         if (EditorGUI.EndChangeCheck())
         {

@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Blueprint", menuName = "Component/Component Builder Blueprint", order = 2)]
-public class ComponentBuilderBlueprint : ScriptableObject
+[CreateAssetMenu(fileName = "Blueprint", menuName = "Component/Component Blueprint", order = 2)]
+public class ComponentBlueprint : ScriptableObject
 {
-    [SerializeField] private List<ComponentBlueprint> blueprints;
+    [SerializeField] private List<ComponentBlueprintData> blueprints;
+    public List<ComponentBlueprintData> Blueprints { get { return blueprints; } }
 }
 
 
 [Serializable]
-public class ComponentBlueprint
+public class ComponentBlueprintData
 {
     [SerializeField] private GameObject model;
     public GameObject Model { get { return model; } }
