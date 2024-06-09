@@ -9,13 +9,6 @@ public class ComponentScript : MonoBehaviour
 
     public ComponentData Data { get { return this.data; } set { data = value; } }
 
-
-    private void Start()
-    {
-      
-        this.SetAppearance();
-    }
-
     public void SetAppearance()
     {
 
