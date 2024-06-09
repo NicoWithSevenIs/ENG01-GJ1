@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
-    Vector3 mousePosition;    
+    Vector3 mousePosition;
 
-    void Start()
-    {
-        
-    }
+    [SerializeField] private string itemName;
 
-    
-    void Update()
-    {
-        
-    }
+    public string ItemName { get { return itemName; } set { itemName = value; } }
+
+
+    [SerializeField] private bool isColliding;
+
+    public bool IsColliding { get { return isColliding; } set { isColliding = value; } }
+
+    [SerializeField] private bool isDividing;
+
+    public bool IsDividing { get { return isDividing; } set { isDividing = value; } }
+
+    [SerializeField] private bool isComponent;
 
     private Vector3 GetMousePos()
     {
@@ -31,4 +35,22 @@ public class DragAndDrop : MonoBehaviour
     {
         this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition - mousePosition);
     }
+    
+    private void Start()
+    {
+        this.isColliding = false;
+        this.isComponent = false;
+        this.isDividing = false;
+        
+    }
+
+    private void OnCollisionEnter(Collision collider)
+    {
+        if (DragDropEvents.instance.checkComponentCollision(this.gameObject, collider.gameObject))
+        {
+            DragDropEvents.instance.callMerge(this.gameObject, collider.gameObject);
+        }
+    }
+
 }
+
