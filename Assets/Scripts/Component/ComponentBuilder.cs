@@ -41,8 +41,8 @@ public class ComponentBuilder
                     script.SetAppearance();
 
 
-                    script.AddComponent<BoxCollider>();
-                    script.AddComponent<Rigidbody>();
+                    component.AddComponent<BoxCollider>();
+                    component.AddComponent<Rigidbody>();
 
                     if(container != null)
                         component.transform.parent = container.transform;
