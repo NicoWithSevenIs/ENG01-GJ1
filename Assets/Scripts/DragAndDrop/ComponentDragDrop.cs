@@ -5,11 +5,21 @@ using UnityEngine;
 public class ComponentDragDrop : DragAndDrop
 {
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        DragDropEvents.instance.FireMergeEvent(this.gameObject, collision.gameObject);
-    }
+    //[SerializeField] private GameObject targetObject;
 
+    //public GameObject TargetObject
+    //{
+    //    get { return targetObject; }
+    //    set { targetObject = value; }
+    //}
+    private void OnCollisionEnter(Collision collision)
+    {   
+        if (collision.gameObject.GetComponent<ComponentDragDrop>() != null && collision.gameObject.GetComponent<ComponentScript>() != null)
+        {
+            //this.targetObject = collision.gameObject;
+            DragDropEvents.instance.FireMergeEvent(this.gameObject, collision.gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,4 +32,5 @@ public class ComponentDragDrop : DragAndDrop
     {
         
     }
+
 }

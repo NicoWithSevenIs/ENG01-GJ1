@@ -5,19 +5,41 @@ using UnityEngine;
 public class DragDropEvents : MonoBehaviour
 {
    public static DragDropEvents instance;
+   [SerializeField] private GameObject currentObject;
 
     public void FireMergeEvent(GameObject currentObject, GameObject targetObject)
     {
-
-        if (currentObject.GetComponent<ComponentScript>() != null && targetObject.GetComponent<ComponentScript>() != null)
+        if (this.checkComponentDrag())
         {
-            ComponentScript currentComponent = currentObject.GetComponent<ComponentScript>();
-            ComponentScript targetComponent = targetObject.GetComponent<ComponentScript>();
-            MergeComponent.instance.processMerge(currentComponent, targetComponent);
+            Debug.Log("Verified that an object is being dragged");
+            MergeComponent.instance.processMerge(currentObject, targetObject);
         }
-
+       
     }
 
+    private bool checkComponentDrag ()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider != null && hit.collider.gameObject != null)
+                {
+                    if (hit.collider.gameObject.GetComponent<ComponentDragDrop>() != null && hit.collider.gameObject.GetComponent<ComponentScript>() != null)
+                    {   
+                        this.currentObject = hit.collider.gameObject;
+                        Debug.Log(currentObject.name + " is being dragged!");
+                        return true;
+                    }
+                }
+            }
+        }
+
+        this.currentObject = null;
+        return false;
+    }
 
     private void Awake()
     {
@@ -30,5 +52,8 @@ public class DragDropEvents : MonoBehaviour
             instance = this;
         }
     }
+
+
 }
+
 

@@ -37,13 +37,15 @@ public class ComponentBuilder
 
                     //attach the necessary scripts here
                     ComponentScript script = component.AddComponent<ComponentScript>();
-                    script.Data= componentData;
+                    script.Data = componentData;
                     script.SetAppearance();
 
 
-                    script.AddComponent<BoxCollider>();
-                    script.AddComponent<Rigidbody>();
+                    component.AddComponent<BoxCollider>();
+                    component.AddComponent<Rigidbody>();
 
+                    component.AddComponent<ComponentDragDrop>();
+                     
                     if(container != null)
                         component.transform.parent = container.transform;
 
