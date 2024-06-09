@@ -22,12 +22,12 @@ public class testEditor: Editor
 
         base.OnInspectorGUI();
 
-       // EditorGUI.BeginChangeCheck();
+        // EditorGUI.BeginChangeCheck();
 
-
+        EditorGUI.BeginDisabledGroup(!Application.isPlaying);
         if(GUILayout.Button("Create Component"))
             script.builder.createComponent(script.componentName, null);
-
+        EditorGUI.EndDisabledGroup();
 
     }
 }
