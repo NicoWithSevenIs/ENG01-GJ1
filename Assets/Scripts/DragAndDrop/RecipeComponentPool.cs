@@ -105,7 +105,7 @@ public class RecipeComponentPool : MonoBehaviour
         {   
             string componentAName = this.recipeComponents[nIndex].GetComponent<ComponentScript>().Data.ComponentA.ComponentName;
             string componentBName = this.recipeComponents[nIndex].GetComponent<ComponentScript>().Data.ComponentB.ComponentName;
-            if (componentAName == currentComponentName && componentBName == targetComponentName)
+            if ((componentAName == currentComponentName && componentBName == targetComponentName) || (componentBName == currentComponentName && componentAName == targetComponentName))
             {
                 currentObject.SetActive(false);
                 targetObject.SetActive(false);
