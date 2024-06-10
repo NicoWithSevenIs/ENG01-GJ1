@@ -7,6 +7,7 @@ public class ComponentDirector : MonoBehaviour
     [Range(1,10)]
     [SerializeField] private int Difficulty = 5;
     [SerializeField] private GameObject dropOrigin;
+    [SerializeField] private GameObject incorrectDrop;
 
     [SerializeField] private ComponentBuilder builder;
 
@@ -28,9 +29,9 @@ public class ComponentDirector : MonoBehaviour
 
         
         List<string> recipe = RecipeGenerator.Instance.CreateRecipe(builder.Blueprint, Difficulty);
+        List<string> incorrectRecipe = RecipeGenerator.Instance.createIncorrectRecipe(builder.Blueprint, recipe, Difficulty);
 
-
-        foreach (var componentName in recipe)
+        foreach (var componentName in incorrectRecipe)
         {
             Vector3 pos = dropOrigin.transform.position;
             pos.x += Random.Range(-3f, 3f);
@@ -40,14 +41,21 @@ public class ComponentDirector : MonoBehaviour
 
         int childCount = dropOrigin.transform.childCount;
 
-        int totalBudget = 0;
+        //int totalBudget = 0;
         foreach (var component in list)
         {
             ComponentData data = component.GetComponent<ComponentScript>().Data;
-            totalBudget += RecipeGenerator.Instance.getBaseComponentCount(data);
+            //totalBudget += RecipeGenerator.Instance.getBaseComponentCount(data);
 
         }
-        Debug.Log("Base Count: " + totalBudget);
+
+        string s = " ";
+        foreach(var str in recipe)
+        {
+            s += str + " ";
+        }
+        Debug.Log("Correct Recipe:" + s);
+        //Debug.Log("Base Count: " + totalBudget);
     }
 
     private void Update()

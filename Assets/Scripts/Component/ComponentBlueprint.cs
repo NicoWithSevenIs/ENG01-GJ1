@@ -55,6 +55,16 @@ public class ComponentBlueprint : ScriptableObject
             
         return null;
     }
+
+    public ComponentData getComponentFromRecipe(ComponentData ComponentA, ComponentData ComponentB)
+    {
+        foreach (var b in this.blueprints)
+            foreach (var componentData in b.DataList)
+                if (componentData.ComponentA.ComponentName == ComponentA.ComponentName && componentData.ComponentB.ComponentName == ComponentB.ComponentName)
+                    return componentData;
+
+        return null;
+    }
 }
 
 

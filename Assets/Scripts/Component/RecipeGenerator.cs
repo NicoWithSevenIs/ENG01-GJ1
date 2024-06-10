@@ -1,5 +1,7 @@
+using DG.Tweening.Plugins;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -69,12 +71,13 @@ public class RecipeGenerator {
 
         newList = rngDivide(blueprint, newList, 40);
 
+        /*
         //adds wrong components
         newList.AddRange(
             budgetedInstantiate(blueprint,  Random.Range(1, difficulty + 3)  ) 
         );
-
-        newList = rngMerge(blueprint, newList);
+        */
+        //newList = rngMerge(blueprint, newList, 50);
 
 
         return newList;
@@ -89,26 +92,78 @@ public class RecipeGenerator {
 
         foreach(var component in original)
         {
-            int rng = Random.Range(0, chance);
+            int rng = Random.Range(0, 100);
 
             if(rng < chance)
             {
                 ComponentData componentData = blueprint.getComponentData(component);
-                newList.Add(componentData.ComponentA.componentName);
-                newList.Add(componentData.ComponentB.componentName);
+                if(getBaseComponentCount(componentData) > 1) {
+                    newList.Add(componentData.ComponentA.ComponentName);
+                    newList.Add(componentData.ComponentB.ComponentName);
+                }
+                else newList.Add(component);
+                
             }
-            else
-            {
-                newList.Add(component);
-            }
+            else newList.Add(component);
+            
         }
 
         return newList;
     }
 
-    private List<string> rngMerge(ComponentBlueprint blueprint, List<string> original)
+
+    private List<string> rngMerge(ComponentBlueprint blueprint, List<string> original, int chance)
     {
-        return null;
+
+        List<string> copy = new List<string>(original);
+        List<string> newList = new List<string>();
+
+        System.Func<int, bool> willMerge = (int chance) =>
+        {
+            chance = Mathf.Clamp(chance, 0, 100);
+            return Random.Range(0, 100) < chance;
+        };
+
+        while (copy.Count > 0)
+        {
+
+            if (copy.Count == 1)
+            {
+                newList.Add(copy[0]);
+                copy.RemoveAt(0);
+                continue;
+            }
+
+            //ermm, randomly selects 2 random indices
+            List<int> random = new List<int>();
+            for (int i = 0; i < random.Count; i++)
+                random.Add(i);
+
+            int IndexA = Random.Range(0, random.Count-1);
+            int A = random[IndexA];
+            random.RemoveAt(IndexA);
+
+            int indexB = Random.Range(0, random.Count - 1);
+            int B = random[indexB];
+
+            //selects 2 random entries in the copied array and attempts to merge them
+            ComponentData componentA = blueprint.getComponentData(copy[A]);
+            ComponentData componentB = blueprint.getComponentData(copy[B]);
+
+            if (componentA != null && componentB != null)
+            {
+                ComponentData result = blueprint.getComponentFromRecipe(componentA, componentB);
+                if (result != null && willMerge(chance))
+                    newList.Add(result.ComponentName);   
+            }
+
+            newList.RemoveAt(A);
+            newList.RemoveAt(B);
+
+        }
+
+        Debug.Log(newList);
+        return newList;
     }
 
     #region Singleton
