@@ -60,6 +60,7 @@ public class ComponentBlueprint : ScriptableObject
     {
         foreach (var b in this.blueprints)
             foreach (var componentData in b.DataList)
+                //check for base component cases here
                 if (componentData.ComponentA.ComponentName == ComponentA.ComponentName && componentData.ComponentB.ComponentName == ComponentB.ComponentName)
                     return componentData;
 

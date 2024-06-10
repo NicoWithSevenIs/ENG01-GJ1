@@ -69,15 +69,23 @@ public class RecipeGenerator {
     {
         List<string> newList = new List<string>(correctRecipe);
 
-        newList = rngDivide(blueprint, newList, 40);
+       
 
-        /*
+
+        List<string> impurities = budgetedInstantiate(blueprint, Random.Range(difficulty, difficulty + 3));
         //adds wrong components
-        newList.AddRange(
-            budgetedInstantiate(blueprint,  Random.Range(1, difficulty + 3)  ) 
-        );
-        */
-        //newList = rngMerge(blueprint, newList, 50);
+        newList.AddRange(impurities);
+
+
+        string s = " ";
+        foreach (var str in impurities)
+        {
+            s += str + " ";
+        }
+        Debug.Log("Impurities:" + s);
+
+        newList = rngDivide(blueprint, newList, 40);
+        newList = rngMerge(blueprint, newList, 50);
 
 
         return newList;
@@ -136,7 +144,7 @@ public class RecipeGenerator {
 
             //ermm, randomly selects 2 random indices
             List<int> random = new List<int>();
-            for (int i = 0; i < random.Count; i++)
+            for (int i = 0; i < copy.Count; i++)
                 random.Add(i);
 
             int IndexA = Random.Range(0, random.Count-1);
