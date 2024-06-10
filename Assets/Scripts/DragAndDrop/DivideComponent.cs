@@ -6,11 +6,13 @@ public class DivideComponent : MonoBehaviour
 {
     public static DivideComponent instance;
 
-    public void processsDivide(GameObject currentObject, GameObject targetObject)
+    public void processDivide(GameObject currentObject)
     {
-       
+        RecipeComponentPool.instance.processDivideComponents(currentObject, currentObject.transform.position);
     }
 
+
+    
     private void Awake()
     {
         if (instance != this && instance != null)

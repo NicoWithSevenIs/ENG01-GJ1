@@ -12,16 +12,17 @@ public class DragDropEvents : MonoBehaviour
         if (this.checkComponentDrag())
         {
             //Debug.Log("Verified that an object is being dragged");
-            MergeComponent.instance.processMerge(currentObject, targetObject);
+            MergeComponent.instance.processMerge(this.currentObject, targetObject);
         }
        
     }
 
     public void FireDivideEvent()
     {
-        if (this.checkComponntRightClick())
+        if (this.checkComponentRightClick())
         {
             Debug.Log("Fired divide event.");
+            DivideComponent.instance.processDivide(currentObject);
         }
             
     }
@@ -49,9 +50,9 @@ public class DragDropEvents : MonoBehaviour
         return false;
     }
 
-    private bool checkComponntRightClick()
+    private bool checkComponentRightClick()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
