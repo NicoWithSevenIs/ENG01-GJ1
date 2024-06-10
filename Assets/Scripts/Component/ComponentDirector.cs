@@ -10,7 +10,7 @@ public class ComponentDirector : MonoBehaviour
     [SerializeField] private GameObject incorrectDrop;
 
     [SerializeField] private ComponentBuilder builder;
-
+    public ComponentBuilder Builder { get { return builder; } }
 
     private List<GameObject> list;
     private void Start()
@@ -65,10 +65,6 @@ public class ComponentDirector : MonoBehaviour
             MakeRecipe();
         }
     }
-
-
-
-
 
 
     #region singleton
