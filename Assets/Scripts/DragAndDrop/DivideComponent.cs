@@ -8,7 +8,7 @@ public class DivideComponent : MonoBehaviour
 
     public void processDivide(GameObject currentObject)
     {
-        RecipeComponentPool.instance.processDivideComponents(currentObject, currentObject.transform.position);
+        RecipeComponentPool.Instance.processDivideComponents(currentObject, currentObject.transform.position);
     }
 
 

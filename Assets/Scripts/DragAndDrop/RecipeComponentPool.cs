@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RecipeComponentPool : MonoBehaviour
 {
-    public static RecipeComponentPool instance;
+    public static RecipeComponentPool Instance;
 
     [SerializeField] private List<GameObject> recipeComponents;
     public List<GameObject> RecipeComponents
@@ -14,10 +14,10 @@ public class RecipeComponentPool : MonoBehaviour
 
     private void createComponentsLevel0 ()
     {
-        GameObject CyanComponent = ComponentDirector.instance.Builder.createComponent("Cyan", null);
-        GameObject GrayComponent = ComponentDirector.instance.Builder.createComponent("Gray", null);
-        GameObject MagentaComponent = ComponentDirector.instance.Builder.createComponent("Magenta", null);
-        GameObject YellowComponent = ComponentDirector.instance.Builder.createComponent("Yellow", null);
+        GameObject CyanComponent = ComponentDirector.Instance.Builder.createComponent("Cyan", null);
+        GameObject GrayComponent = ComponentDirector.Instance.Builder.createComponent("Gray", null);
+        GameObject MagentaComponent = ComponentDirector.Instance.Builder.createComponent("Magenta", null);
+        GameObject YellowComponent = ComponentDirector.Instance.Builder.createComponent("Yellow", null);
 
         this.recipeComponents.Add(CyanComponent);
         this.recipeComponents.Add(GrayComponent);
@@ -28,12 +28,12 @@ public class RecipeComponentPool : MonoBehaviour
     
     private void createComponentsLevel1()
     {
-        GameObject AegeanComponent = ComponentDirector.instance.Builder.createComponent("Aegean", null);
-        GameObject BoysenberryComponent = ComponentDirector.instance.Builder.createComponent("Boysenberry", null);
-        GameObject ButterscotchComponent = ComponentDirector.instance.Builder.createComponent("Butterscotch", null);
-        GameObject LimeComponent = ComponentDirector.instance.Builder.createComponent("Lime", null);
-        GameObject ScarletComponent = ComponentDirector.instance.Builder.createComponent("Scarlet", null);
-        GameObject LavenderComponent = ComponentDirector.instance.Builder.createComponent("Lavender", null);
+        GameObject AegeanComponent = ComponentDirector.Instance.Builder.createComponent("Aegean", null);
+        GameObject BoysenberryComponent = ComponentDirector.Instance.Builder.createComponent("Boysenberry", null);
+        GameObject ButterscotchComponent = ComponentDirector.Instance.Builder.createComponent("Butterscotch", null);
+        GameObject LimeComponent = ComponentDirector.Instance.Builder.createComponent("Lime", null);
+        GameObject ScarletComponent = ComponentDirector.Instance.Builder.createComponent("Scarlet", null);
+        GameObject LavenderComponent = ComponentDirector.Instance.Builder.createComponent("Lavender", null);
 
         this.recipeComponents.Add(AegeanComponent);
         this.recipeComponents.Add(BoysenberryComponent);
@@ -45,14 +45,14 @@ public class RecipeComponentPool : MonoBehaviour
     
     private void createComponentsLevel2()
     {
-        GameObject ArcticComponent = ComponentDirector.instance.Builder.createComponent("Arctic", null);
-        GameObject GoldComponent = ComponentDirector.instance.Builder.createComponent("Gold", null);
-        GameObject DarkGreenComponent = ComponentDirector.instance.Builder.createComponent("Dark Green", null);
-        GameObject BubblegumPinkComponent = ComponentDirector.instance.Builder.createComponent("Bubblegum Pink", null);
-        GameObject VioletComponent = ComponentDirector.instance.Builder.createComponent("Violet", null);
-        GameObject SpiceComponent = ComponentDirector.instance.Builder.createComponent("Spice", null);
-        GameObject CharcoalComponent = ComponentDirector.instance.Builder.createComponent("Charcoal", null);
-        GameObject ScotchMistComponent = ComponentDirector.instance.Builder.createComponent("Scotch Mist", null);
+        GameObject ArcticComponent = ComponentDirector.Instance.Builder.createComponent("Arctic", null);
+        GameObject GoldComponent = ComponentDirector.Instance.Builder.createComponent("Gold", null);
+        GameObject DarkGreenComponent = ComponentDirector.Instance.Builder.createComponent("Dark Green", null);
+        GameObject BubblegumPinkComponent = ComponentDirector.Instance.Builder.createComponent("Bubblegum Pink", null);
+        GameObject VioletComponent = ComponentDirector.Instance.Builder.createComponent("Violet", null);
+        GameObject SpiceComponent = ComponentDirector.Instance.Builder.createComponent("Spice", null);
+        GameObject CharcoalComponent = ComponentDirector.Instance.Builder.createComponent("Charcoal", null);
+        GameObject ScotchMistComponent = ComponentDirector.Instance.Builder.createComponent("Scotch Mist", null);
 
         this.recipeComponents.Add(ArcticComponent);
         this.recipeComponents.Add(GoldComponent);
@@ -148,13 +148,13 @@ public class RecipeComponentPool : MonoBehaviour
 
     void Awake()
     {
-        if (instance != this && instance != null)
+        if (Instance != this && Instance != null)
         {
             Destroy(this);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
     // Start is called before the first frame update

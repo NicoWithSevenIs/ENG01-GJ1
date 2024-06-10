@@ -12,7 +12,7 @@ public class DragDropEvents : MonoBehaviour
         if (this.checkComponentDrag())
         {
             //Debug.Log("Verified that an object is being dragged");
-            MergeComponent.instance.processMerge(this.currentObject, targetObject);
+            MergeComponent.Instance.processMerge(this.currentObject, targetObject);
         }
        
     }

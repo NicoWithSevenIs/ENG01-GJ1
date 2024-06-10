@@ -69,12 +69,12 @@ public class ComponentDirector : MonoBehaviour
 
     #region singleton
 
-    private static ComponentDirector instance = null;
+    public static ComponentDirector Instance = null;
 
     private void Awake()
     {
-        if(instance == null)
-            instance = this;
+        if(Instance == null)
+            Instance = this;
         else Destroy(this.gameObject);
 
     }
