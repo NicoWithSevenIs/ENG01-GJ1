@@ -9,6 +9,8 @@ public class ComponentBlueprint : ScriptableObject
     [SerializeField] private List<ComponentBlueprintData> blueprints;
     public List<ComponentBlueprintData> Blueprints { get { return blueprints; } }
 
+   
+
     public ComponentData getRandomComponentData() 
     {
         Func<int> getTierRandom = () => {
@@ -60,12 +62,20 @@ public class ComponentBlueprint : ScriptableObject
     {
         foreach (var b in this.blueprints)
             foreach (var componentData in b.DataList)
-                //check for base component cases here
+            {
+                if (ComponentUtilities.getBaseComponentCount(componentData) == 1)
+                    continue;
                 if (componentData.ComponentA.ComponentName == ComponentA.ComponentName && componentData.ComponentB.ComponentName == ComponentB.ComponentName)
                     return componentData;
+            }
+                
+                
 
         return null;
     }
+
+    
+
 }
 
 

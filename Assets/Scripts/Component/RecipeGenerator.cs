@@ -9,16 +9,6 @@ using UnityEngine;
 
 public class RecipeGenerator {
 
-    //private List<string> _recipes;
-
-
-    public int getBaseComponentCount(ComponentData component)
-    {
-        if (component.ComponentA == null || component.ComponentB == null)
-            return 1;
-        return getBaseComponentCount(component.ComponentA) + getBaseComponentCount(component.ComponentB);
-    }
-
 
     /*
        Balancing Spreadsheet:
@@ -51,7 +41,7 @@ public class RecipeGenerator {
         {
             ComponentData data = blueprint.getRandomComponentData();
             recipe.Add(data.name);
-            componentBudget -= this.getBaseComponentCount(data);
+            componentBudget -= ComponentUtilities.getBaseComponentCount(data);
         }
 
         //if there's remaning budget, roll for a specific tier that amounts to the remaining value
@@ -105,7 +95,7 @@ public class RecipeGenerator {
             if(rng < chance)
             {
                 ComponentData componentData = blueprint.getComponentData(component);
-                if(getBaseComponentCount(componentData) > 1) {
+                if(ComponentUtilities.getBaseComponentCount(componentData) > 1) {
                     newList.Add(componentData.ComponentA.ComponentName);
                     newList.Add(componentData.ComponentB.ComponentName);
                 }
@@ -147,30 +137,50 @@ public class RecipeGenerator {
             for (int i = 0; i < copy.Count; i++)
                 random.Add(i);
 
-            int IndexA = Random.Range(0, random.Count-1);
-            int A = random[IndexA];
-            random.RemoveAt(IndexA);
+            int nA = Random.Range(0, random.Count-1);
+            int indexA = random[nA];
+            string A = copy[indexA];
+            random.RemoveAt(nA);
+           
+            int nB = Random.Range(0, random.Count - 1);
+            int indexB = random[nB];
+            string B = copy[indexB];
 
-            int indexB = Random.Range(0, random.Count - 1);
-            int B = random[indexB];
+            copy.Remove(A);
+            copy.Remove(B);
 
             //selects 2 random entries in the copied array and attempts to merge them
-            ComponentData componentA = blueprint.getComponentData(copy[A]);
-            ComponentData componentB = blueprint.getComponentData(copy[B]);
+            ComponentData componentA = blueprint.getComponentData(A);
+            ComponentData componentB = blueprint.getComponentData(B);
+            ComponentData result = blueprint.getComponentFromRecipe(componentA, componentB);
 
-            if (componentA != null && componentB != null)
+            if (result != null && willMerge(chance))
             {
-                ComponentData result = blueprint.getComponentFromRecipe(componentA, componentB);
-                if (result != null && willMerge(chance))
-                    newList.Add(result.ComponentName);   
+                newList.Add(result.ComponentName);
+            }
+            else
+            {
+                newList.Add(A);
+                newList.Add(B);
             }
 
-            newList.RemoveAt(A);
-            newList.RemoveAt(B);
+ 
 
         }
 
-        Debug.Log(newList);
+        string s = " ";
+        foreach (var str in original)
+        {
+            s += str + " ";
+        }
+        Debug.Log("Original:" + s);
+
+        s = " ";
+        foreach (var str in newList)
+        {
+            s += str + " ";
+        }
+        Debug.Log("Remerged:" + s);
         return newList;
     }
 
