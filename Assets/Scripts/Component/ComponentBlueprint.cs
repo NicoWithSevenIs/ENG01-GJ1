@@ -8,6 +8,44 @@ public class ComponentBlueprint : ScriptableObject
 {
     [SerializeField] private List<ComponentBlueprintData> blueprints;
     public List<ComponentBlueprintData> Blueprints { get { return blueprints; } }
+
+    public ComponentData getRandomComponentData() 
+    {
+        Func<int> getTierRandom = () => {
+
+            
+            /*
+                Chances:
+                    Level 0: 40%
+                    Level 1: 35%
+                    Level 2: 25%
+             */
+
+            int[] breakpoints = {0, 40, 75, 100};
+            int rng = UnityEngine.Random.Range(breakpoints[0], breakpoints[breakpoints.Length - 1]);
+
+            int currentTier = 0;
+            for(int i = 1; i < breakpoints.Length; i++)
+            {
+                if (rng >= breakpoints[i - 1] && rng < breakpoints[i])
+                    //this could be i-1 but for readability purposes....
+                    return currentTier; 
+                currentTier++;
+            }
+
+
+            return 0;
+        };
+
+
+        ComponentData[] datalist = blueprints[getTierRandom()].DataList;
+        return datalist[UnityEngine.Random.Range(0, datalist.Length)];
+    }
+
+    public ComponentData getRandomComponentDataFromTier(int tier)
+    {
+        return blueprints[tier].DataList[UnityEngine.Random.Range(0, blueprints[tier].DataList.Length)];
+    }
 }
 
 

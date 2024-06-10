@@ -10,6 +10,9 @@ public class ComponentBuilder
 {
 
     [SerializeField] private ComponentBlueprint componentBlueprint = null;
+
+    public ComponentBlueprint Blueprint { get { return componentBlueprint; } }
+
     [SerializeField] private GameObject container;
 
     public ComponentBuilder(ComponentBlueprint blueprint) { this.AssignBlueprint(blueprint); }
@@ -35,6 +38,10 @@ public class ComponentBuilder
                     component = GameObject.Instantiate(b.Model);
                     component.name = componentData.componentName;
 
+                    if(position != null)
+                        component.transform.position = position.Value;
+
+
                     //attach the necessary scripts here
                     ComponentScript script = component.AddComponent<ComponentScript>();
                     script.Data= componentData;
@@ -46,7 +53,7 @@ public class ComponentBuilder
 
                     if(container != null)
                         component.transform.parent = container.transform;
-
+                        Debug.Log(componentData.ComponentName + ": " + RecipeGenerator.Instance.getBaseComponentCount(componentData));
                     break;
                 }
             }
