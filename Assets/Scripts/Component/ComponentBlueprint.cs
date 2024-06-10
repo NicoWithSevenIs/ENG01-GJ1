@@ -13,7 +13,6 @@ public class ComponentBlueprint : ScriptableObject
     {
         Func<int> getTierRandom = () => {
 
-            
             /*
                 Chances:
                     Level 0: 40%
@@ -45,6 +44,16 @@ public class ComponentBlueprint : ScriptableObject
     public ComponentData getRandomComponentDataFromTier(int tier)
     {
         return blueprints[tier].DataList[UnityEngine.Random.Range(0, blueprints[tier].DataList.Length)];
+    }
+
+    public ComponentData getComponentData(string componentName)
+    {
+        foreach (var b in this.blueprints)
+            foreach (var componentData in b.DataList)
+                if (componentData.ComponentName == componentName)
+                    return componentData;
+            
+        return null;
     }
 }
 

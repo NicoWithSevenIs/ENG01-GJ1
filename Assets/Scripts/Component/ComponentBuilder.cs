@@ -53,7 +53,7 @@ public class ComponentBuilder
 
                     if(container != null)
                         component.transform.parent = container.transform;
-                        Debug.Log(componentData.ComponentName + ": " + RecipeGenerator.Instance.getBaseComponentCount(componentData));
+              
                     break;
                 }
             }
