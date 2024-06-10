@@ -13,98 +13,31 @@ public class MergeComponent : MonoBehaviour
     }
 
     private void processMergeLevel1(GameObject currentObject, GameObject targetObject)
-    {
-        ComponentScript currentComponent = currentObject.GetComponent<ComponentScript>();
-        ComponentScript targetComponent = targetObject.GetComponent<ComponentScript>();
+    {   
+        Vector3 currentObjectPos = currentObject.transform.position;
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Aegean", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Boysenberry", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Butterscotch", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Lime", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Scarlet", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Lavender", currentObjectPos);
 
-        if (currentComponent.Data.ComponentName == "Cyan" && targetComponent.Data.ComponentName == "Gray")
-        {
-           this.invokeMerge(currentObject, targetObject, "Aegean");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Magenta" && targetComponent.Data.ComponentName == "Gray")
-        {
-            this.invokeMerge(currentObject, targetObject, "Boysenberry");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Yellow" && targetComponent.Data.ComponentName == "Gray")
-        {
-            this.invokeMerge(currentObject, targetObject, "Butterscotch");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Cyan" && targetComponent.Data.ComponentName == "Yellow")
-        {
-            this.invokeMerge(currentObject, targetObject, "Lime");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Magenta" && targetComponent.Data.ComponentName == "Yellow")
-        {
-            this.invokeMerge(currentObject, targetObject, "Scarlet");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Cyan" && targetComponent.Data.ComponentName == "Magenta")
-        {
-            this.invokeMerge(currentObject, targetObject, "Lavender");
-        }
-       
     }
 
     private void processMergeLevel2(GameObject currentObject, GameObject targetObject)
     {
-        ComponentScript currentComponent = currentObject.GetComponent<ComponentScript>();
-        ComponentScript targetComponent = targetObject.GetComponent<ComponentScript>();
-
-        if (currentComponent.Data.ComponentName == "Lavender" && targetComponent.Data.ComponentName == "Cyan")
-        {
-            this.invokeMerge(currentObject, targetObject, "Arctic");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Yellow" && targetComponent.Data.ComponentName == "Butterscotch")
-        {
-            this.invokeMerge(currentObject, targetObject, "Gold");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Gray" && targetComponent.Data.ComponentName == "Lime")
-        {
-            this.invokeMerge(currentObject, targetObject, "Dark Green");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Magenta" && targetComponent.Data.ComponentName == "Lime")
-        {
-            this.invokeMerge(currentObject, targetObject, "Bubblegum Pink");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Boysenberry" && targetComponent.Data.ComponentName == "Lavender")
-        {
-            this.invokeMerge(currentObject, targetObject, "Violet");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Scarlet" && targetComponent.Data.ComponentName == "Butterscotch")
-        {
-            this.invokeMerge(currentObject, targetObject, "Spice");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Scarlet" && targetComponent.Data.ComponentName == "Aegean")
-        {
-            this.invokeMerge(currentObject, targetObject, "Charcoal");
-        }
-
-        else if (currentComponent.Data.ComponentName == "Gray" && targetComponent.Data.ComponentName == "Gray")
-        {
-            this.invokeMerge(currentObject, targetObject, "Scotch Mist");
-        }
-
-    }
-
-    private void invokeMerge(GameObject currentObject, GameObject targetObject, string name)
-    {
         Vector3 currentObjectPos = currentObject.transform.position;
-        currentObject.SetActive(false);
-        targetObject.SetActive(false);
-        RecipeComponentPool.instance.clone(name, currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Arctic", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Gold", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Dark Green", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Bubblegum Pink", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Violet", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Spice", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Charcoal", currentObjectPos);
+        RecipeComponentPool.instance.processMergeComponents(currentObject, targetObject, "Scotch Mist", currentObjectPos);
+
     }
-
-
+    
     private void Awake()
     {
         if (instance != this && instance != null)

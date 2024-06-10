@@ -11,10 +11,19 @@ public class DragDropEvents : MonoBehaviour
     {
         if (this.checkComponentDrag())
         {
-            Debug.Log("Verified that an object is being dragged");
+            //Debug.Log("Verified that an object is being dragged");
             MergeComponent.instance.processMerge(currentObject, targetObject);
         }
        
+    }
+
+    public void FireDivideEvent()
+    {
+        if (this.checkComponntRightClick())
+        {
+            Debug.Log("Fired divide event.");
+        }
+            
     }
 
     private bool checkComponentDrag ()
@@ -30,7 +39,30 @@ public class DragDropEvents : MonoBehaviour
                     if (hit.collider.gameObject.GetComponent<ComponentDragDrop>() != null && hit.collider.gameObject.GetComponent<ComponentScript>() != null)
                     {   
                         this.currentObject = hit.collider.gameObject;
-                        Debug.Log(currentObject.name + " is being dragged!");
+                        return true;
+                    }
+                }
+            }
+        }
+
+        this.currentObject = null;
+        return false;
+    }
+
+    private bool checkComponntRightClick()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider != null && hit.collider.gameObject != null)
+                {
+                    if (hit.collider.gameObject.GetComponent<ComponentDragDrop>() != null && hit.collider.gameObject.GetComponent<ComponentScript>() != null)
+                    {
+                        this.currentObject = hit.collider.gameObject;
+                        //Debug.Log(currentObject.name + " is being dragged!");
                         return true;
                     }
                 }
@@ -53,6 +85,10 @@ public class DragDropEvents : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        this.FireDivideEvent();
+    }
 
 }
 

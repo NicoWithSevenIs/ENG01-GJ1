@@ -86,6 +86,34 @@ public class RecipeComponentPool : MonoBehaviour
         return null;
     }
 
+    public void processMergeComponents(GameObject currentObject, GameObject targetObject, string mergedComponentName, Vector3 position)
+    {
+
+        string currentComponentName = currentObject.GetComponent<ComponentScript>().Data.ComponentName;
+        string targetComponentName = targetObject.GetComponent<ComponentScript>().Data.ComponentName;
+
+        int nIndex = -1;
+        for (int i = 0; i < this.recipeComponents.Count; i++)
+        {
+            if (this.recipeComponents[i].GetComponent<ComponentScript>().Data.ComponentName == mergedComponentName)
+            {
+               nIndex = i;
+            }
+        }
+
+        if (nIndex != -1)
+        {   
+            string componentAName = this.recipeComponents[nIndex].GetComponent<ComponentScript>().Data.ComponentA.ComponentName;
+            string componentBName = this.recipeComponents[nIndex].GetComponent<ComponentScript>().Data.ComponentB.ComponentName;
+            if (componentAName == currentComponentName && componentBName == targetComponentName)
+            {
+                currentObject.SetActive(false);
+                targetObject.SetActive(false);
+                this.clone(mergedComponentName, position);
+            }
+        }
+    }
+
     public void clone(string name, Vector3 position)
     {
         GameObject cloneObject = Instantiate(this.findRecipeComponent(name));
