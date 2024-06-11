@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class RecipeGenerator {
 
@@ -59,9 +60,7 @@ public class RecipeGenerator {
     {
         List<string> newList = new List<string>(correctRecipe);
 
-       
-
-
+      
         List<string> impurities = budgetedInstantiate(blueprint, Random.Range(difficulty, difficulty + 3));
         //adds wrong components
         newList.AddRange(impurities);
@@ -74,9 +73,25 @@ public class RecipeGenerator {
         }
         Debug.Log("Impurities:" + s);
 
-        newList = rngDivide(blueprint, newList, 40);
-        newList = rngMerge(blueprint, newList, 50);
+        List<string> appended = new List<string>(correctRecipe);
+        appended.AddRange(impurities);
 
+        s = " ";
+        foreach (var str in appended)
+        {
+            s += str + " ";
+        }
+        Debug.Log("Incorrect:" + s);
+
+        newList = rngDivide(blueprint, newList, 70);
+        newList = rngMerge(blueprint, newList, 70);
+
+        s = " ";
+        foreach (var str in newList)
+        {
+            s += str + " ";
+        }
+        Debug.Log("Remerged:" + s);
 
         return newList;
     }
@@ -164,23 +179,11 @@ public class RecipeGenerator {
                 newList.Add(B);
             }
 
- 
+
 
         }
 
-        string s = " ";
-        foreach (var str in original)
-        {
-            s += str + " ";
-        }
-        Debug.Log("Original:" + s);
-
-        s = " ";
-        foreach (var str in newList)
-        {
-            s += str + " ";
-        }
-        Debug.Log("Remerged:" + s);
+  
         return newList;
     }
 
