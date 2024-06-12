@@ -12,6 +12,7 @@ public class ComponentDirector : MonoBehaviour
     public ComponentBuilder Builder { get { return builder; } }
 
     private List<GameObject> list;
+
     private void Start()
     {
         list = new List<GameObject>();
@@ -52,6 +53,12 @@ public class ComponentDirector : MonoBehaviour
             ComponentData data = component.GetComponent<ComponentScript>().Data;
         }
 
+        string s = " ";
+        foreach (var str in correctRecipe)
+        {
+            s += str + " ";
+        }
+        Debug.Log("Correct Recipe:" + s);
     }
 
     private void Update()
@@ -60,6 +67,12 @@ public class ComponentDirector : MonoBehaviour
         {
             MakeRecipe();
         }
+
+        if (this.list.Count > 0 && this.correctRecipe.Count > 0)
+        {
+            RecipeChecker.Instance.checkPotionContents(this.list, this.correctRecipe);
+        }
+
     }
 
 
