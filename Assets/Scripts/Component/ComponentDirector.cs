@@ -80,6 +80,11 @@ public class ComponentDirector : MonoBehaviour
         {
             ProcessStage(this.Difficulty);
         }
+
+        if (this.componentPool.Count > 0 && this.correctRecipe.Count > 0)
+        {
+            RecipeChecker.Instance.checkPotionContents(this.componentPool, this.correctRecipe);
+        }
     }
 
     #region ObjectPooling
