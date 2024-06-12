@@ -5,6 +5,7 @@ using UnityEngine;
 public class ImpurityArea : MonoBehaviour
 {
     [SerializeField] private Transform dropArea;
+    [SerializeField] private Transform impurityArea;
 
 
     private void OnTriggerStay(Collider other)
@@ -14,7 +15,8 @@ public class ImpurityArea : MonoBehaviour
         if (data == null)
             return;
 
-        other.transform.parent = transform;
+        other.transform.parent = impurityArea;
+     
 
     }
 
@@ -24,6 +26,7 @@ public class ImpurityArea : MonoBehaviour
 
         if (data == null)
             return;
+
 
         other.transform.parent = dropArea;
     }
