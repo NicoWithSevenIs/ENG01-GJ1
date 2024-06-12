@@ -8,74 +8,158 @@ public class ComponentDirector : MonoBehaviour
     [SerializeField] private int Difficulty = 5;
     [SerializeField] private GameObject dropOrigin;
 
-    [SerializeField] private ComponentBuilder builder;
-    public ComponentBuilder Builder { get { return builder; } }
 
-    private List<GameObject> list;
+    [SerializeField] private ComponentBuilder builder;
+
+    [SerializeField] private List<string> correctRecipe;
+    [SerializeField] private List<string> incorrectRecipe;
+
+
+    [Header("Object Pooling")]
+
+    [SerializeField] private List<GameObject> componentPool;
+    [SerializeField] private Transform poolableContainer;
+
+
+
 
     private void Start()
     {
-        list = new List<GameObject>();
+        componentPool = new List<GameObject>();
+        if (this.poolableContainer == null)
+            throw new System.Exception("Object Pooling needs a container");
     }
 
-    [SerializeField] private List<string> correctRecipe;
+    public GameObject MakeComponent(string componentName)
+    {
+        return builder.createComponent(componentName, null);
+    }
 
-    [SerializeField] private List<string> incorrectRecipe;
+    public ComponentBlueprint getBlueprint()
+    {
+        return builder.Blueprint;
+    }
 
-    public void MakeRecipe()
+    public void ProcessStage(int difficulty)
     {
 
-        foreach (var o in list)
-            Destroy(o);
-        list.Clear();
+        foreach (var component in componentPool)
+            Destroy(component);
+        componentPool.Clear();
 
         correctRecipe.Clear();
         incorrectRecipe.Clear();
 
-        correctRecipe = RecipeGenerator.Instance.CreateRecipe(builder.Blueprint, Difficulty);
-        incorrectRecipe = RecipeGenerator.Instance.createIncorrectRecipe(builder.Blueprint, correctRecipe, Difficulty);
+        correctRecipe = RecipeGenerator.Instance.CreateRecipe(builder.Blueprint, difficulty);
+        incorrectRecipe = RecipeGenerator.Instance.createIncorrectRecipe(builder.Blueprint, correctRecipe, difficulty);
+
+        string s = "";
+        foreach(var c in correctRecipe)
+        {
+            s += c + " ";
+        }
+        Debug.Log("Correct Recipe: " + s);
+
+
 
         foreach (var componentName in incorrectRecipe)
         {
-            Vector3 pos = dropOrigin.transform.position;
+            Vector3 pos = poolableContainer.transform.position;
             pos.x += Random.Range(-3f, 3f);
             pos.z += Random.Range(-3f, 3f);
 
-            GameObject component = builder.createComponent(componentName, pos);
-            component.transform.parent = dropOrigin.transform;
-            list.Add(component);
+            GameObject component = this.getPoolableInstance(componentName, pos);
+          
         }
 
-        int childCount = dropOrigin.transform.childCount;
-
-        foreach (var component in list)
-        {
-            ComponentData data = component.GetComponent<ComponentScript>().Data;
-        }
-
-        string s = " ";
-        foreach (var str in correctRecipe)
-        {
-            s += str + " ";
-        }
-        Debug.Log("Correct Recipe:" + s);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            MakeRecipe();
+            ProcessStage(this.Difficulty);
         }
+    }
 
-        if (this.list.Count > 0 && this.correctRecipe.Count > 0)
+    #region ObjectPooling
+    public GameObject getPoolableInstance(string componentName)
+    {
+        GameObject poolable = null;
+
+
+        foreach (var componentInstance in componentPool)
         {
-            RecipeChecker.Instance.checkPotionContents(this.list, this.correctRecipe);
+
+            ComponentData data = componentInstance.GetComponent<ComponentScript>()?.Data;
+
+            //ignores element if it doesn't have ComponentData attached to it
+            if (data == null)
+                continue;
+
+
+            if (data.ComponentName == componentName && !componentInstance.activeInHierarchy)
+            {
+                poolable = componentInstance;
+
+            }
+
         }
 
+        if (poolable == null)
+        {
+            poolable = builder.createComponent(componentName, null);
+    
+           
+            if (poolable != null)
+            {
+                poolable.transform.parent = poolableContainer;
+                componentPool.Add(poolable);
+            }
+      
+        }
+
+        if (poolable != null)
+        {
+            poolable.SetActive(true);
+            poolable.transform.parent = dropOrigin.transform;
+        }
+            
+
+        return poolable;
+    }
+
+    public GameObject getPoolableInstance(string componentName, Vector3 position)
+    {
+        GameObject poolable = getPoolableInstance(componentName);
+        poolable.transform.position = position;
+        return poolable;
     }
 
 
+    public void setPoolableInactive(GameObject instance)
+    {
+        if (this.componentPool.Contains(instance))
+        {
+            
+            instance.transform.parent = poolableContainer;
+            instance.transform.position = poolableContainer.position;
+            instance.SetActive(false);
+        }
+        else
+            print("component not found");
+           
+    }
+
+    public bool isObjectInPool(GameObject instance)
+    {
+        foreach (var poolable in componentPool)
+            if (poolable == instance)
+                return true;
+        return false;
+    }
+
+    #endregion
     #region singleton
 
     public static ComponentDirector Instance = null;
