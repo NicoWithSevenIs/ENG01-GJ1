@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d5de663b1dcd849a038c7c73caa369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Difficulty: 3
+  Difficulty: 1
   dropOrigin: {fileID: 1141835667}
   incorrectDrop: {fileID: 0}
   builder:
