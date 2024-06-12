@@ -38,7 +38,7 @@ public class RandomPotion : MonoBehaviour
         hole.GetComponent<Renderer>().material = potionMaterials[
             Random.Range(0, potionMaterials.Count)
         ];
-        hole.GetComponent<Renderer>().material.SetFloat("_Fill", Random.Range(0.2f, 1f));
+        hole.GetComponent<Renderer>().material.SetFloat("_Fill", Random.Range(0.5f, 1f));
 
         if (hasCork)
         {
