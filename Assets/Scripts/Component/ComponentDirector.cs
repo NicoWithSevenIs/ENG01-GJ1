@@ -18,6 +18,7 @@ public class ComponentDirector : MonoBehaviour
     }
 
     [SerializeField] private List<string> correctRecipe;
+
     [SerializeField] private List<string> incorrectRecipe;
 
     public void MakeRecipe()

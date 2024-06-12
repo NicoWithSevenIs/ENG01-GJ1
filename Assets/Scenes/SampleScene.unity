@@ -331,10 +331,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Difficulty: 1
   dropOrigin: {fileID: 1141835667}
-  incorrectDrop: {fileID: 0}
   builder:
     componentBlueprint: {fileID: 11400000, guid: 0e6b403745bf4624eb19b938889a80c1, type: 2}
-    container: {fileID: 1141835667}
+  correctRecipe: []
+  incorrectRecipe: []
 --- !u!1 &379592644
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 991972768}
   - component: {fileID: 991972767}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Singletons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1053,7 +1053,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   builder:
     componentBlueprint: {fileID: 11400000, guid: 0e6b403745bf4624eb19b938889a80c1, type: 2}
-    container: {fileID: 379592644}
   componentName: 
 --- !u!4 &1220564613
 Transform:
