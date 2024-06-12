@@ -7,7 +7,6 @@ public class ComponentDirector : MonoBehaviour
     [Range(1,10)]
     [SerializeField] private int Difficulty = 5;
     [SerializeField] private GameObject dropOrigin;
-    [SerializeField] private GameObject incorrectDrop;
 
     [SerializeField] private ComponentBuilder builder;
     public ComponentBuilder Builder { get { return builder; } }
@@ -18,7 +17,8 @@ public class ComponentDirector : MonoBehaviour
         list = new List<GameObject>();
     }
 
-
+    [SerializeField] private List<string> correctRecipe;
+    [SerializeField] private List<string> incorrectRecipe;
 
     public void MakeRecipe()
     {
@@ -27,35 +27,30 @@ public class ComponentDirector : MonoBehaviour
             Destroy(o);
         list.Clear();
 
-        
-        List<string> recipe = RecipeGenerator.Instance.CreateRecipe(builder.Blueprint, Difficulty);
-        List<string> incorrectRecipe = RecipeGenerator.Instance.createIncorrectRecipe(builder.Blueprint, recipe, Difficulty);
+        correctRecipe.Clear();
+        incorrectRecipe.Clear();
+
+        correctRecipe = RecipeGenerator.Instance.CreateRecipe(builder.Blueprint, Difficulty);
+        incorrectRecipe = RecipeGenerator.Instance.createIncorrectRecipe(builder.Blueprint, correctRecipe, Difficulty);
 
         foreach (var componentName in incorrectRecipe)
         {
             Vector3 pos = dropOrigin.transform.position;
             pos.x += Random.Range(-3f, 3f);
             pos.z += Random.Range(-3f, 3f);
-            list.Add(builder.createComponent(componentName, pos));
+
+            GameObject component = builder.createComponent(componentName, pos);
+            component.transform.parent = dropOrigin.transform;
+            list.Add(component);
         }
 
         int childCount = dropOrigin.transform.childCount;
 
-        //int totalBudget = 0;
         foreach (var component in list)
         {
             ComponentData data = component.GetComponent<ComponentScript>().Data;
-            //totalBudget += RecipeGenerator.Instance.getBaseComponentCount(data);
-
         }
 
-        string s = " ";
-        foreach(var str in recipe)
-        {
-            s += str + " ";
-        }
-        Debug.Log("Correct Recipe:" + s);
-        //Debug.Log("Base Count: " + totalBudget);
     }
 
     private void Update()

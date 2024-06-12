@@ -50,15 +50,6 @@ public class MergeComponent : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-
-    }
 }
 
 
