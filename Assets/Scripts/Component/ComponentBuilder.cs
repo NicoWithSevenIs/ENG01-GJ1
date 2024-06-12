@@ -13,7 +13,6 @@ public class ComponentBuilder
 
     public ComponentBlueprint Blueprint { get { return componentBlueprint; } }
 
-    [SerializeField] private GameObject container;
 
     public ComponentBuilder(ComponentBlueprint blueprint) { this.AssignBlueprint(blueprint); }
     public void AssignBlueprint(ComponentBlueprint blueprint) { this.componentBlueprint = blueprint; }
@@ -52,9 +51,7 @@ public class ComponentBuilder
                     component.AddComponent<Rigidbody>();
 
                     component.AddComponent<ComponentDragDrop>();
-                     
-                    if(container != null)
-                        component.transform.parent = container.transform;
+                 
               
                     break;
                 }

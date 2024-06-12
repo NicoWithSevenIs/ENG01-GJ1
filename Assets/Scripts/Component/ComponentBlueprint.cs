@@ -65,6 +65,7 @@ public class ComponentBlueprint : ScriptableObject
             {
                 if (ComponentUtilities.getBaseComponentCount(componentData) == 1)
                     continue;
+
                 if (componentData.ComponentA.ComponentName == ComponentA.ComponentName && componentData.ComponentB.ComponentName == ComponentB.ComponentName)
                     return componentData;
             }

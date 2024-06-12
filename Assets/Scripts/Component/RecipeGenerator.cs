@@ -125,6 +125,9 @@ public class RecipeGenerator {
     }
 
 
+    /*
+        Merges random valid components in the recipe passed
+     */
     private List<string> rngMerge(ComponentBlueprint blueprint, List<string> original, int chance)
     {
 
