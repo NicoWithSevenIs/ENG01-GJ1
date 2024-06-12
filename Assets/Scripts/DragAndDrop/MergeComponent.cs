@@ -8,36 +8,48 @@ public class MergeComponent : MonoBehaviour
     
     public void processMerge(GameObject currentObject, GameObject targetObject)
     {
-        this.processMergeLevel1(currentObject, targetObject);
-        this.processMergeLevel2(currentObject, targetObject);
+        processMergeComponents(currentObject, targetObject, targetObject.transform.position);
     }
 
-    private void processMergeLevel1(GameObject currentObject, GameObject targetObject)
-    {   
-        Vector3 currentObjectPos = currentObject.transform.position;
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Aegean", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Boysenberry", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Butterscotch", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Lime", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Scarlet", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Lavender", currentObjectPos);
-
-    }
-
-    private void processMergeLevel2(GameObject currentObject, GameObject targetObject)
+    public void processMergeComponents(GameObject dragged, GameObject other, Vector3 position)
     {
-        Vector3 currentObjectPos = currentObject.transform.position;
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Arctic", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Gold", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Dark Green", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Bubblegum Pink", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Violet", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Spice", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Charcoal", currentObjectPos);
-        RecipeComponentPool.Instance.processMergeComponents(currentObject, targetObject, "Scotch Mist", currentObjectPos);
+
+        ComponentBlueprint blueprint = ComponentDirector.Instance.getBlueprint();
+
+        if (!ComponentDirector.Instance.isObjectInPool(dragged) || !ComponentDirector.Instance.isObjectInPool(other))
+            return;
+
+        ComponentData draggedData = dragged.GetComponent<ComponentScript>()?.Data;
+        ComponentData otherData = other.GetComponent<ComponentScript>()?.Data;
+
+        if (draggedData == null || otherData == null)
+            return;
+
+        foreach (var tier in blueprint.Blueprints)
+        {
+            foreach (var componentData in tier.DataList)
+            {
+                if (componentData.ComponentA == null || componentData.ComponentB == null)
+                    continue;
+
+                string a = componentData.ComponentA.ComponentName;
+                string b = componentData.ComponentB.ComponentName;
+
+                if (a == draggedData.ComponentName && b == otherData.ComponentName || a == otherData.ComponentName && b == draggedData.ComponentName)
+                {
+                    ComponentDirector.Instance.getPoolableInstance(componentData.ComponentName, dragged.transform.position);
+                    ComponentDirector.Instance.setPoolableInactive(dragged);
+                    ComponentDirector.Instance.setPoolableInactive(other);
+                   
+                    break;
+                }
+
+            }
+        }
 
     }
-    
+
+
     private void Awake()
     {
         if (Instance != this && Instance != null)

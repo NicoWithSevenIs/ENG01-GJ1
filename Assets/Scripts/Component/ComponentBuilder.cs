@@ -33,7 +33,7 @@ public class ComponentBuilder
             {
                 if(componentData.ComponentName == componentName)
                 {
-
+        
                     component = GameObject.Instantiate(b.Model);
                     component.name = componentData.componentName;
 

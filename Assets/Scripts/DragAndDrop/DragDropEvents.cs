@@ -21,7 +21,6 @@ public class DragDropEvents : MonoBehaviour
     {
         if (this.checkComponentRightClick())
         {
-            Debug.Log("Fired divide event.");
             DivideComponent.instance.processDivide(currentObject);
         }
             
