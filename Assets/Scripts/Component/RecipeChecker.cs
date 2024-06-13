@@ -5,10 +5,11 @@ using UnityEngine;
 public class RecipeChecker
 {
     private List<string> contentNames;
+    private bool completeMatch;
 
-    public void checkPotionContents(List<GameObject> contents, List<string> correctRecipe)
+    public void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
     {
-        this.updateContentNames(contents);
+        this.updateContentNames(dropOrigin);
 
         if (this.contentNames.Count != correctRecipe.Count)
         {
@@ -16,7 +17,7 @@ public class RecipeChecker
         }
         else
         {
-            bool value = this.crosscheckRecipe(contents, correctRecipe);
+            bool value = this.crosscheckRecipe(correctRecipe);
             if (value)
             {
                 Debug.Log("NO impurities found.");
@@ -28,13 +29,13 @@ public class RecipeChecker
         }
     }
 
-    private bool crosscheckRecipe(List<GameObject> contents, List<string> correctRecipe)
+    private bool crosscheckRecipe(List<string> correctRecipe)
     {
         List<string> temp_contentNames = new List<string>(this.contentNames);
 
         for (int i = 0; i < correctRecipe.Count; i++)
         {
-            for (int j = 0; j < contents.Count; j++)
+            for (int j = 0; j < this.contentNames.Count; j++)
             {
                 if (temp_contentNames[j] == correctRecipe[i])
                 {
@@ -44,7 +45,7 @@ public class RecipeChecker
         }
 
         if (temp_contentNames.Count == 0)
-        {
+        {   
             return true;
         }
         else
@@ -53,14 +54,21 @@ public class RecipeChecker
         }
     }
 
-    private void updateContentNames(List<GameObject> contents)
+    private void updateContentNames(GameObject dropOrigin)
     {
        this.contentNames.Clear();
-        for (int i = 0; i < contents.Count; i++)
-        {
-            string componentName = contents[i].GetComponent<ComponentScript>().Data.ComponentName;
-            this.contentNames.Add(componentName);
-        }
+        //foreach(var child in dropOrigin.transform)
+        //{
+        //    string componentName = child.transform.gameObject.GetComponent<ComponentScript>().Data.ComponentName;
+        //    this.contentNames.Add(componentName);
+        //}
+
+       //for (int i = 0; i < dropOrigin.transform.childCount; i++)
+       //{
+       //     Debug.Log(dropOrigin.transform.childCount);
+       //    string componentName = dropOrigin.transform.GetChild(i).GetComponent<ComponentScript>().Data.ComponentName;
+       //    this.contentNames.Add(componentName);
+       //}
     }
 
     #region Singleton

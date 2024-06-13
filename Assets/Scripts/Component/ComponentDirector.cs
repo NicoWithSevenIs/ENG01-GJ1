@@ -81,9 +81,9 @@ public class ComponentDirector : MonoBehaviour
             ProcessStage(this.Difficulty);
         }
 
-        if (this.componentPool.Count > 0 && this.correctRecipe.Count > 0)
+        if (this.dropOrigin.transform.childCount > 0 && this.correctRecipe.Count > 0)
         {
-            RecipeChecker.Instance.checkPotionContents(this.componentPool, this.correctRecipe);
+            RecipeChecker.Instance.checkPotionContents(this.dropOrigin, this.correctRecipe);
         }
     }
 
