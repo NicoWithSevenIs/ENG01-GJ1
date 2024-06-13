@@ -8,13 +8,13 @@ using UnityEditor;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public class RecipeGenerator {
+public static  class RecipeGenerator {
 
     /*
        Balancing Spreadsheet:
         https://docs.google.com/spreadsheets/d/1UnIKWTCbTy17ZQssfgBspnh3ofPz7Q9hEi2mbXQHXw0/edit?usp=sharing
      */
-    public List<string> CreateRecipe(ComponentBlueprint blueprint, int difficulty)
+    public static List<string> CreateRecipe(ComponentBlueprint blueprint, int difficulty)
     {
 
         difficulty = Mathf.Clamp(difficulty, 1, 10);
@@ -29,11 +29,11 @@ public class RecipeGenerator {
 
         //Debug.Log("Budget is: " + componentBudget);
 
-        return budgetedInstantiate(blueprint, componentBudget);
+        return RecipeGenerator.budgetedInstantiate(blueprint, componentBudget);
       
     }
 
-    public List<string> budgetedInstantiate(ComponentBlueprint blueprint, int componentBudget)
+    public static List<string> budgetedInstantiate(ComponentBlueprint blueprint, int componentBudget)
     {
         List<string> recipe = new List<string>();
         //4 is the highest component budget, will try to find a way to make this not hardcoded if time allows it
@@ -55,12 +55,12 @@ public class RecipeGenerator {
 
 
 
-    public List<string> createIncorrectRecipe(ComponentBlueprint blueprint, List<string> correctRecipe, int difficulty)
+    public static List<string> createIncorrectRecipe(ComponentBlueprint blueprint, List<string> correctRecipe, int difficulty)
     {
         List<string> newList = new List<string>(correctRecipe);
 
       
-        List<string> impurities = budgetedInstantiate(blueprint, Random.Range(difficulty, difficulty + 3));
+        List<string> impurities = RecipeGenerator.budgetedInstantiate(blueprint, Random.Range(difficulty, difficulty + 3));
         //adds wrong components
         newList.AddRange(impurities);
 
@@ -95,7 +95,7 @@ public class RecipeGenerator {
         return newList;
     }
 
-    private List<string> rngDivide(ComponentBlueprint blueprint, List<string> original, int chance)
+    private static List<string> rngDivide(ComponentBlueprint blueprint, List<string> original, int chance)
     {
         
         List<string> newList = new List<string>();
@@ -127,7 +127,7 @@ public class RecipeGenerator {
     /*
         Merges random valid components in the recipe passed
      */
-    private List<string> rngMerge(ComponentBlueprint blueprint, List<string> original, int chance)
+    private static List<string> rngMerge(ComponentBlueprint blueprint, List<string> original, int chance)
     {
 
         List<string> copy = new List<string>(original);
@@ -189,11 +189,11 @@ public class RecipeGenerator {
         return newList;
     }
 
-    public void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
+    public static void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
     {    
         if (dropOrigin.transform.childCount > 0)
         {
-            bool match = this.crosscheckRecipe(dropOrigin, correctRecipe);
+            bool match = RecipeGenerator.crosscheckRecipe(dropOrigin, correctRecipe);
             if (match)
             {
                 Debug.Log("NO impurities found.");
@@ -205,7 +205,7 @@ public class RecipeGenerator {
         }
     }
 
-    private bool crosscheckRecipe(GameObject dropOrigin, List<string> correctRecipe)
+    private static bool crosscheckRecipe(GameObject dropOrigin, List<string> correctRecipe)
     {
 
         List<string> contentNames = new List<string>();

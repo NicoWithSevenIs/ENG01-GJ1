@@ -20,7 +20,6 @@ public class ComponentDirector : MonoBehaviour
     [SerializeField] private List<GameObject> componentPool;
     [SerializeField] private Transform poolableContainer;
 
-    private RecipeGenerator recipeGenerator;
 
     private void Start()
     {
@@ -28,7 +27,6 @@ public class ComponentDirector : MonoBehaviour
         if (this.poolableContainer == null)
             throw new System.Exception("Object Pooling needs a container");
 
-        recipeGenerator = new RecipeGenerator();
     }
 
     public GameObject MakeComponent(string componentName)
@@ -51,8 +49,8 @@ public class ComponentDirector : MonoBehaviour
         correctRecipe.Clear();
         incorrectRecipe.Clear();
 
-        correctRecipe = recipeGenerator.CreateRecipe(builder.Blueprint, difficulty);
-        incorrectRecipe = recipeGenerator.createIncorrectRecipe(builder.Blueprint, correctRecipe, difficulty);
+        correctRecipe = RecipeGenerator.CreateRecipe(builder.Blueprint, difficulty);
+        incorrectRecipe = RecipeGenerator.createIncorrectRecipe(builder.Blueprint, correctRecipe, difficulty);
 
         string s = "";
         foreach(var c in correctRecipe)
@@ -84,7 +82,7 @@ public class ComponentDirector : MonoBehaviour
 
         if (this.correctRecipe != null)
         {
-            recipeGenerator.checkPotionContents(this.dropOrigin, this.correctRecipe);
+            RecipeGenerator.checkPotionContents(this.dropOrigin, this.correctRecipe);
         }
     }
 
