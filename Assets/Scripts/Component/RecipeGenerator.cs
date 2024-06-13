@@ -205,37 +205,33 @@ public class RecipeGenerator {
 
     private bool crosscheckRecipe(GameObject dropOrigin, List<string> correctRecipe)
     {
+
         List<string> contentNames = new List<string>();
 
         foreach (Transform child in dropOrigin.transform)
         {
-            string componentName = child.transform.gameObject.GetComponent<ComponentScript>().Data.ComponentName;
-            contentNames.Add(componentName);
-        }
-        
-        List<string> temp = new List<string>(contentNames); 
+            ComponentData data = child.transform.gameObject.GetComponent<ComponentScript>()?.Data;
 
-        if (contentNames.Count == correctRecipe.Count)
+            if(data != null)
+                contentNames.Add(data.ComponentName);        
+        }
+
+        List<string> temp = new List<string>(contentNames);
+
+
+        for (int i = 0; i < correctRecipe.Count; i++)
         {
-            for (int i = 0; i < correctRecipe.Count; i++)
+            for (int j = 0; j < temp.Count; j++)
             {
-                for (int j = 0; j < contentNames.Count; j++)
+                if (temp[j] == correctRecipe[i])
                 {
-                    if (temp[j] == correctRecipe[i])
-                    {   
-                        string compName = correctRecipe[i];
-                        temp.Remove(compName);
-                        break;
-                    }
+                    temp.Remove(correctRecipe[i]);
+                    break;
                 }
             }
-
-            if (temp.Count == 0)
-                return true;
-            
         }
-       
-        return false;
+
+        return contentNames.Count == correctRecipe.Count && temp.Count == 0;
     }
 
 }

@@ -82,7 +82,7 @@ public class ComponentDirector : MonoBehaviour
             ProcessStage(this.Difficulty);
         }
 
-        if (this.dropOrigin.transform.childCount > 0 && this.correctRecipe.Count > 0)
+        if (this.correctRecipe != null)
         {
             recipeGenerator.checkPotionContents(this.dropOrigin, this.correctRecipe);
         }
