@@ -190,23 +190,7 @@ public class RecipeGenerator {
         return newList;
     }
 
-    #region Singleton
-    private static RecipeGenerator instance = null;
-
-    public static RecipeGenerator Instance
-    {
-        get
-        {
-            if(instance == null)
-                instance = new RecipeGenerator();
-            return instance;
-        }
-    }
-
-    private RecipeGenerator() { }
-    private RecipeGenerator(RecipeGenerator instance) { }
-
-    #endregion
+  
 
 
 }
