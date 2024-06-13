@@ -10,7 +10,6 @@ using static UnityEngine.UI.Image;
 
 public class RecipeGenerator {
 
-
     /*
        Balancing Spreadsheet:
         https://docs.google.com/spreadsheets/d/1UnIKWTCbTy17ZQssfgBspnh3ofPz7Q9hEi2mbXQHXw0/edit?usp=sharing
@@ -190,7 +189,53 @@ public class RecipeGenerator {
         return newList;
     }
 
-  
+    public void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
+    {    
+        bool match = this.crosscheckRecipe(dropOrigin, correctRecipe);
+        if (match)
+        {
+            Debug.Log("NO impurities found.");
+        }
+        else
+        {
+            Debug.Log("impurities FOUND.");
+        }
+        
+    }
 
+    private bool crosscheckRecipe(GameObject dropOrigin, List<string> correctRecipe)
+    {
+        List<string> contentNames = new List<string>();
+
+        foreach (Transform child in dropOrigin.transform)
+        {
+            string componentName = child.transform.gameObject.GetComponent<ComponentScript>().Data.ComponentName;
+            contentNames.Add(componentName);
+        }
+        
+        List<string> temp = new List<string>(contentNames); 
+
+        if (contentNames.Count == correctRecipe.Count)
+        {
+            for (int i = 0; i < correctRecipe.Count; i++)
+            {
+                for (int j = 0; j < contentNames.Count; j++)
+                {
+                    if (temp[j] == correctRecipe[i])
+                    {   
+                        string compName = correctRecipe[i];
+                        temp.Remove(compName);
+                        break;
+                    }
+                }
+            }
+
+            if (temp.Count == 0)
+                return true;
+            
+        }
+       
+        return false;
+    }
 
 }

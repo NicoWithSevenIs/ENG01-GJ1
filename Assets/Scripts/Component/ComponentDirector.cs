@@ -22,7 +22,6 @@ public class ComponentDirector : MonoBehaviour
 
     private RecipeGenerator recipeGenerator;
 
-
     private void Start()
     {
         componentPool = new List<GameObject>();
@@ -85,7 +84,7 @@ public class ComponentDirector : MonoBehaviour
 
         if (this.dropOrigin.transform.childCount > 0 && this.correctRecipe.Count > 0)
         {
-            RecipeChecker.Instance.checkPotionContents(this.dropOrigin, this.correctRecipe);
+            recipeGenerator.checkPotionContents(this.dropOrigin, this.correctRecipe);
         }
     }
 
