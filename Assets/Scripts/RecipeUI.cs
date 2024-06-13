@@ -23,6 +23,9 @@ public class RecipeUI : MonoBehaviour
     [SerializeField]
     GameObject recipeCloseSheet;
 
+    [SerializeField]
+    List<GameObject> componentDisplays = new List<GameObject>();
+
     public void ShowRecipe()
     {
         UpdateSheetSize();
@@ -62,15 +65,23 @@ public class RecipeUI : MonoBehaviour
 
     void UpdateSheetSize()
     {
+        foreach (GameObject componentDisplay in componentDisplays)
+        {
+            componentDisplay.SetActive(true);
+        }
         if (componentCount <= 6)
         {
             recipeSheet.GetComponent<Image>().overrideSprite = sheetSizes[2];
             if (componentCount <= 4)
             {
                 recipeSheet.GetComponent<Image>().overrideSprite = sheetSizes[1];
+                componentDisplays[4].SetActive(false);
+                componentDisplays[5].SetActive(false);
                 if (componentCount <= 2)
                 {
                     recipeSheet.GetComponent<Image>().overrideSprite = sheetSizes[0];
+                    componentDisplays[2].SetActive(false);
+                    componentDisplays[3].SetActive(false);
                 }
             }
         }
