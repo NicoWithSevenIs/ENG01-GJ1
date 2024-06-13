@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class MergeComponent : MonoBehaviour
 {
-    public static MergeComponent Instance;
-    
-    public void processMerge(GameObject currentObject, GameObject targetObject)
-    {
-        processMergeComponents(currentObject, targetObject, targetObject.transform.position);
-    }
+    [SerializeField] private GameObject currentObject;
 
-    public void processMergeComponents(GameObject dragged, GameObject other, Vector3 position)
+    private void processMergeComponents(GameObject dragged, GameObject other)
     {
-
+        Vector3 position = other.transform.position;
         ComponentBlueprint blueprint = ComponentDirector.Instance.getBlueprint();
 
         if (!ComponentDirector.Instance.isObjectInPool(dragged) || !ComponentDirector.Instance.isObjectInPool(other))
@@ -49,17 +44,41 @@ public class MergeComponent : MonoBehaviour
 
     }
 
+    private bool checkComponentDrag()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider != null && hit.collider.gameObject != null)
+                {
+                    if (hit.collider.gameObject.GetComponent<ComponentDragDrop>() != null && hit.collider.gameObject.GetComponent<ComponentScript>() != null)
+                    {
+                        this.currentObject = hit.collider.gameObject;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        this.currentObject = null;
+        return false;
+    }
+
+    public void FireMergeEvent(GameObject currentObject, GameObject targetObject)
+    {
+        if (this.checkComponentDrag())
+        {
+            this.processMergeComponents(this.currentObject, targetObject);
+        }
+
+    }
 
     private void Awake()
     {
-        if (Instance != this && Instance != null)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
+      
     }
 
 }

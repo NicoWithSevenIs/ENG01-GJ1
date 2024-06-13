@@ -8,8 +8,7 @@ public class ComponentDragDrop : DragAndDrop
     {   
         if (collision.gameObject.GetComponent<ComponentDragDrop>() != null && collision.gameObject.GetComponent<ComponentScript>() != null)
         {
-            //this.targetObject = collision.gameObject;
-            DragDropEvents.instance.FireMergeEvent(this.gameObject, collision.gameObject);
+            
         }
     }
 

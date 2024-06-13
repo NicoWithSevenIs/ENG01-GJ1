@@ -52,6 +52,13 @@ public class EventNames {
 		public const string ON_FIRST_SCAN = "FIRST_TARGET_SCAN";
 		public const string ON_FINAL_SCAN = "ON_FINAL_SCAN";
 	}
+
+	public class PotionComponents
+	{
+		public const string ON_COMPONENT_MERGE = "ON_COMPONENT_MERGE";
+		public const string ON_COMPONENT_DIVIDE = "ON_COMPONENT_DIVIDE";
+	
+	}
 }
 
 

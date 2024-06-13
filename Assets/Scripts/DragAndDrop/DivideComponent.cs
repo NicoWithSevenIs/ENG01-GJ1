@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class DivideComponent : MonoBehaviour
 {
-    public static DivideComponent instance;
+    [SerializeField] private GameObject currentObject;
 
-    public void processDivide(GameObject currentObject)
+    public void processDivideComponents()
     {
-       processDivideComponents(currentObject, currentObject.transform.position);
-    }
-
-    public void processDivideComponents(GameObject currentObject, Vector3 position)
-    {
+        Vector3 position = currentObject.transform.position;
         string currentComponentName = currentObject.GetComponent<ComponentScript>().Data.ComponentName;
 
         ComponentData data = currentObject.GetComponent<ComponentScript>().Data;
@@ -31,16 +27,39 @@ public class DivideComponent : MonoBehaviour
 
     }
 
+    private bool checkComponentRightClick()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider != null && hit.collider.gameObject != null)
+                {
+                    if (hit.collider.gameObject.GetComponent<ComponentDragDrop>() != null && hit.collider.gameObject.GetComponent<ComponentScript>() != null)
+                    {
+                        currentObject = hit.collider.gameObject;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        currentObject = null;
+        return false;
+    }
 
     private void Awake()
     {
-        if (instance != this && instance != null)
+
+    }
+
+    private void Update()
+    {
+        if (this.checkComponentRightClick())
         {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
+            processDivideComponents();
         }
     }
 }

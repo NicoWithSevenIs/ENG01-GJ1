@@ -16,15 +16,6 @@ public class DragDropEvents : MonoBehaviour
        
     }
 
-    public void FireDivideEvent()
-    {
-        if (this.checkComponentRightClick())
-        {
-            DivideComponent.instance.processDivide(currentObject);
-        }
-            
-    }
-
     private bool checkComponentDrag ()
     {
         if (Input.GetMouseButton(0))
@@ -48,30 +39,6 @@ public class DragDropEvents : MonoBehaviour
         return false;
     }
 
-    private bool checkComponentRightClick()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider != null && hit.collider.gameObject != null)
-                {
-                    if (hit.collider.gameObject.GetComponent<ComponentDragDrop>() != null && hit.collider.gameObject.GetComponent<ComponentScript>() != null)
-                    {
-                        this.currentObject = hit.collider.gameObject;
-                        //Debug.Log(currentObject.name + " is being dragged!");
-                        return true;
-                    }
-                }
-            }
-        }
-
-        this.currentObject = null;
-        return false;
-    }
-
     private void Awake()
     {
         if (instance != this && instance != null)
@@ -84,10 +51,7 @@ public class DragDropEvents : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        this.FireDivideEvent();
-    }
+   
 
 }
 
