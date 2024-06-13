@@ -8,7 +8,10 @@ public class ComponentDragDrop : DragAndDrop
     {   
         if (collision.gameObject.GetComponent<ComponentDragDrop>() != null && collision.gameObject.GetComponent<ComponentScript>() != null)
         {
-            
+            Parameters param = new Parameters();
+            param.PutExtra("TARGET_OBJECT", collision.gameObject);
+            EventBroadcaster.Instance.PostEvent(EventNames.PotionComponents.ON_COMPONENT_MERGE, param);
+
         }
     }
 

@@ -67,8 +67,13 @@ public class MergeComponent : MonoBehaviour
         return false;
     }
 
-    public void FireMergeEvent(GameObject currentObject, GameObject targetObject)
+    public void FireMergeEvent(Parameters param)
     {
+        GameObject targetObject = (GameObject) param.GetObjectExtra("TARGET_OBJECT");
+        if (targetObject == null)
+        {
+            Debug.Log("target is null.");
+        }
         if (this.checkComponentDrag())
         {
             this.processMergeComponents(this.currentObject, targetObject);
@@ -78,7 +83,7 @@ public class MergeComponent : MonoBehaviour
 
     private void Awake()
     {
-       
+        EventBroadcaster.Instance.AddObserver(EventNames.PotionComponents.ON_COMPONENT_MERGE, this.FireMergeEvent);
     }
 
 }
