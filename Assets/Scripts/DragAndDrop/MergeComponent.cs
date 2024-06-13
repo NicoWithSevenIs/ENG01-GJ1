@@ -78,7 +78,7 @@ public class MergeComponent : MonoBehaviour
 
     private void Awake()
     {
-      
+       
     }
 
 }
