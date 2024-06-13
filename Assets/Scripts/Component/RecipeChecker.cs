@@ -5,8 +5,7 @@ using UnityEngine;
 public class RecipeChecker
 {
     private List<string> contentNames;
-    private bool completeMatch;
-
+ 
     public void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
     {
         this.updateContentNames(dropOrigin);
@@ -17,8 +16,8 @@ public class RecipeChecker
         }
         else
         {
-            bool value = this.crosscheckRecipe(correctRecipe);
-            if (value)
+            bool match  = this.crosscheckRecipe(correctRecipe);
+            if (match)
             {
                 Debug.Log("NO impurities found.");
             }
@@ -40,6 +39,7 @@ public class RecipeChecker
                 if (temp_contentNames[j] == correctRecipe[i])
                 {
                     temp_contentNames.Remove(correctRecipe[i]);
+                    break;
                 }
             }
         }
@@ -57,18 +57,11 @@ public class RecipeChecker
     private void updateContentNames(GameObject dropOrigin)
     {
        this.contentNames.Clear();
-        //foreach(var child in dropOrigin.transform)
-        //{
-        //    string componentName = child.transform.gameObject.GetComponent<ComponentScript>().Data.ComponentName;
-        //    this.contentNames.Add(componentName);
-        //}
-
-       //for (int i = 0; i < dropOrigin.transform.childCount; i++)
-       //{
-       //     Debug.Log(dropOrigin.transform.childCount);
-       //    string componentName = dropOrigin.transform.GetChild(i).GetComponent<ComponentScript>().Data.ComponentName;
-       //    this.contentNames.Add(componentName);
-       //}
+       foreach (Transform child in dropOrigin.transform)
+       {
+           string componentName = child.transform.gameObject.GetComponent<ComponentScript>().Data.ComponentName;
+           this.contentNames.Add(componentName);
+       }
     }
 
     #region Singleton
