@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168013188f1e88640bd19083e9daf632, type: 3}
+  m_Name: Aegean
+  m_EditorClassIdentifier: 
+  componentName: Aegean
+  bodyColor: {r: 0.3617059, g: 0.45017785, b: 0.5058824, a: 1}
+  borderColor: {r: 0.2731765, g: 0.41918802, b: 0.5058824, a: 1}
+  isBuildable: 1
+  componentA: {fileID: 11400000, guid: 046623b0dca063e46b38595ace66574b, type: 2}
+  componentB: {fileID: 11400000, guid: 8661268088421354790af82b89aea05f, type: 2}

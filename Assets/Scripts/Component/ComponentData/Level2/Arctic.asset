@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168013188f1e88640bd19083e9daf632, type: 3}
+  m_Name: Arctic
+  m_EditorClassIdentifier: 
+  componentName: Arctic
+  bodyColor: {r: 0.710902, g: 0.8499133, b: 0.8627451, a: 1}
+  borderColor: {r: 0.58431375, g: 0.8392157, b: 0.8627451, a: 0.7764706}
+  isBuildable: 1
+  accentColor: {r: 1, g: 1, b: 1, a: 1}
+  componentA: {fileID: 11400000, guid: d4725b69c320bd34bbc8713fe600e1b1, type: 2}
+  componentB: {fileID: 11400000, guid: 046623b0dca063e46b38595ace66574b, type: 2}
