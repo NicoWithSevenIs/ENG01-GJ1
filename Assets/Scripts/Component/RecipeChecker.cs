@@ -48,10 +48,8 @@ public class RecipeChecker
         {   
             return true;
         }
-        else
-        {
-            return false;
-        }
+       
+        return false;
     }
 
     private void updateContentNames(GameObject dropOrigin)
