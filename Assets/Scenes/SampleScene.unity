@@ -321,7 +321,6 @@ GameObject:
   - component: {fileID: 279247154}
   - component: {fileID: 279247157}
   - component: {fileID: 279247156}
-  - component: {fileID: 279247155}
   m_Layer: 0
   m_Name: DragDropEvents
   m_TagString: Untagged
@@ -344,19 +343,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1563658645}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &279247155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 279247153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6152b9effc22b43b281427b49637a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentObject: {fileID: 0}
 --- !u!114 &279247156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71986af9a2c87a34e8f26837bfc47c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentObject: {fileID: 0}
 --- !u!114 &279247157
 MonoBehaviour:
   m_ObjectHideFlags: 0

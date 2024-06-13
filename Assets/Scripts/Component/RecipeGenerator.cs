@@ -191,16 +191,18 @@ public class RecipeGenerator {
 
     public void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
     {    
-        bool match = this.crosscheckRecipe(dropOrigin, correctRecipe);
-        if (match)
+        if (dropOrigin.transform.childCount > 0)
         {
-            Debug.Log("NO impurities found.");
+            bool match = this.crosscheckRecipe(dropOrigin, correctRecipe);
+            if (match)
+            {
+                Debug.Log("NO impurities found.");
+            }
+            else
+            {
+                Debug.Log("impurities FOUND.");
+            }
         }
-        else
-        {
-            Debug.Log("impurities FOUND.");
-        }
-        
     }
 
     private bool crosscheckRecipe(GameObject dropOrigin, List<string> correctRecipe)
