@@ -61,7 +61,7 @@ public class TriggerCameraPan : MonoBehaviour
             else
             {
                 yDistanceBeforeZoom = transform.position.y;
-                print(yDistanceBeforeZoom);
+
                 isZooming = true;
                 isZoomingOut = false;
                 isRotating = false;
