@@ -17,11 +17,15 @@ public class TriggerCameraPan : MonoBehaviour
 
     private float yDistanceBeforeZoom = 0f;
 
+    private float initialXRotation;
+
 
     private void Awake()
     {
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_START, LookAtTable);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_START, LookAwayFromTable);
+        this.initialXRotation = transform.eulerAngles.x;
+        print(this.initialXRotation);
     }
 
     public void LookAtTable()
@@ -34,7 +38,7 @@ public class TriggerCameraPan : MonoBehaviour
        // print("Invoked");
         isZooming = true;
         isZoomingOut = true;
-        isRotationReversed = true;
+     
     }
 
     // Update is called once per frame
@@ -57,26 +61,27 @@ public class TriggerCameraPan : MonoBehaviour
             else
             {
                 yDistanceBeforeZoom = transform.position.y;
+                print(yDistanceBeforeZoom);
                 isZooming = true;
                 isZoomingOut = false;
                 isRotating = false;
             }
         else
         {
-            /*
-            if (pos.x >= 300f || pos.x <= 15f)
+            
+            if ((int)pos.x != initialXRotation)
             {
-                pos.x -= Time.deltaTime * rotateSpeed;
+                pos.x += Time.deltaTime * rotateSpeed;
             }
             else
             {
-                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+
                 isRotating = false;
 
-               EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_END);
+                 EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_END);
         
             }
-            */
+           
         }
 
 
@@ -90,6 +95,9 @@ public class TriggerCameraPan : MonoBehaviour
     {
         if(!isZooming) 
             return;
+
+
+      
 
         if (!isZoomingOut)
         {
@@ -107,7 +115,7 @@ public class TriggerCameraPan : MonoBehaviour
         }
         else
         {
-            if (Mathf.Abs(transform.position.y - yDistanceBeforeZoom) >= 0)
+            if (yDistanceBeforeZoom - transform.position.y >= 0)
             {
                 Vector3 pos = transform.position;
                 pos.y += Time.deltaTime * zoomSpeed;
@@ -116,6 +124,8 @@ public class TriggerCameraPan : MonoBehaviour
             else
             {
                 isRotating = true;
+                isRotationReversed = true;
+                print("ok");
                 isZooming = false;
             }
         }

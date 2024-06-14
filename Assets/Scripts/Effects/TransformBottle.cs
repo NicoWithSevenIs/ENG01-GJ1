@@ -40,7 +40,7 @@ public class TransformBottle : MonoBehaviour
             else if (this.transform.position.y >= this.topThreshold)
             {
                 StartCoroutine(delayedAction
-                    (1.25f, () =>
+                    (0.75f, () =>
                         {
                             EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
                             StartCoroutine(delayedAction(0.5f, () => { 
