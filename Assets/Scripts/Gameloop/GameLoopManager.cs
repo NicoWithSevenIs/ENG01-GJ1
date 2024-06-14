@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(GameTimer))]
 public class GameLoopManager : MonoBehaviour
@@ -40,7 +40,7 @@ public class GameLoopManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END, StartStage);
         this.totalProfit = 0f;
         this.currentHour = 0;
-
+        //this.difficulty = UnityEngine.Random.Range(1, 10);
         this.originalPosition = potion.transform.position;
     }
 
@@ -103,7 +103,7 @@ public class GameLoopManager : MonoBehaviour
 
         if(isForced && percentCompletion != 1f)
         {
-            print("Time's Up");
+            SceneManager.LoadScene("Lose");
         }
         
         if(isCorrect && percentCompletion == 1f)
@@ -111,6 +111,7 @@ public class GameLoopManager : MonoBehaviour
             print("Good Job!");
         }
 
+  
 
         EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_START);
 
@@ -131,6 +132,18 @@ public class GameLoopManager : MonoBehaviour
 
         ComponentDirector.Instance.ClearBatch();
 
+        SceneManager.LoadScene("Win");
+
+        /*
+        potion.SetActive(true);
+
+
+        potion.GetComponent<TransformBottle>().hasBeenPurfied = true;
+      
+        potion.GetComponent<TransformBottle>().willFling = true;
+
+        potion.GetComponent<TransformBottle>().startLevitation();
+        */
     }
 
     private void EndDay()

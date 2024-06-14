@@ -13,6 +13,8 @@ public class LevitateComponent : MonoBehaviour
 
     public bool hasBeenPurfied = false;
 
+
+
     private Rigidbody rb;
 
     private void Awake()
@@ -61,6 +63,10 @@ public class LevitateComponent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.levitateObject();
+       
+
+         this.levitateObject();
+
+
     }
 }

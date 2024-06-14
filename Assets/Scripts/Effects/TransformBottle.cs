@@ -7,13 +7,13 @@ public class TransformBottle : MonoBehaviour
 {
     [SerializeField] private float topThreshold;
     [SerializeField] private GameObject glow;
-    private bool isFloat;
+    public bool isFloat;
     public bool triggerCam;
 
-    private bool hasBeenPurfied = false;
+    public bool hasBeenPurfied = false;
 
     private Rigidbody rb;
-
+    public bool willFling = false;
     private void Awake()
     {
         this.topThreshold = this.transform.position.y - 1.9f;
@@ -26,6 +26,11 @@ public class TransformBottle : MonoBehaviour
     private void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
+        this.startLevitation();
+    }
+
+    public void startLevitation()
+    {
         StartCoroutine(delayedAction(2f, () => { this.isFloat = true; }));
     }
    
@@ -87,6 +92,13 @@ public class TransformBottle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.levitateObject();
+        if (this.willFling)
+        {
+            rb.AddForce(new Vector3(UnityEngine.Random.Range(-3, 3) * 20, 0, 0), ForceMode.Impulse);
+            rb.useGravity = true;
+            willFling = false;
+        }
+        else
+            this.levitateObject();
     }
 }
