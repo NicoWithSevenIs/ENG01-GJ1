@@ -18,6 +18,7 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] private float quotaMultiplier = 1;
     [SerializeField] private float dailyProfit;
     [SerializeField] private float dailyQuota;
+    [SerializeField] private float totalProfit;
 
     [Header("Time")]
     [SerializeField] private int currentHour;
@@ -29,6 +30,7 @@ public class GameLoopManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_POTION_SUBMISSION, OnPotionSubmission);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_STAGE_START, DeconstructPotion);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_CAMERA_PAN_END, StartStage);
+        this.totalProfit = 0f;
     }
 
 
@@ -107,6 +109,8 @@ public class GameLoopManager : MonoBehaviour
             //gameOver
             return;
         }
+
+        totalProfit += dailyProfit;
 
         this.quotaMultiplier *= 1.1f + 1f / difficulty;
         //temp

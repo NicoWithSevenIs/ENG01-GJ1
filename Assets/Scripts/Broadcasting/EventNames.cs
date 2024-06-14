@@ -69,6 +69,7 @@ public class EventNames {
 	public class Game_Loop
 	{
 		public const string ON_STAGE_START = "ON_STAGE_START";
+		public const string ON_CAMERA_PAN_START = "ON_CAMERA_PAN_START";
 		public const string ON_CAMERA_PAN_END = "ON_CAMERA_PAN_END";
         public const string ON_STAGE_END = "ON_STAGE_END";
         public const string ON_DAY_END = "ON_DAY_END";

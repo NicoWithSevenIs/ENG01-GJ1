@@ -12,8 +12,6 @@ public class TransformBottle : MonoBehaviour
     public bool triggerCam;
 
 
-    
-
     private void Awake()
     {
         this.topThreshold = this.transform.position.y - 1.9f;
@@ -21,6 +19,8 @@ public class TransformBottle : MonoBehaviour
         this.triggerCam = false;
         //this.glow.SetActive(false);
     }
+
+   
 
     private void levitateObject()
     { 
@@ -44,7 +44,12 @@ public class TransformBottle : MonoBehaviour
                     (1.5f, () =>
                         { 
                             EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
-                            StartCoroutine(delayedAction(0.5f, () => { this.triggerCam = true; }));
+                            StartCoroutine(delayedAction(0.5f, () => { 
+                                    Parameters p = new Parameters();
+                                    p.PutExtra("IS_REVERSED", false);
+                                    EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_START, p);
+                                    gameObject.SetActive(false);
+                            }));
                         }
                     )
                 );
