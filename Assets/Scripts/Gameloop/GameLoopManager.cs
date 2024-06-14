@@ -27,6 +27,8 @@ public class GameLoopManager : MonoBehaviour
     private void Start()
     {
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_POTION_SUBMISSION, OnPotionSubmission);
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_STAGE_START, DeconstructPotion);
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_CAMERA_PAN_END, StartStage);
     }
 
 
@@ -37,7 +39,7 @@ public class GameLoopManager : MonoBehaviour
         this.dailyProfit = 0f;
         this.dailyQuota = 500 * quotaMultiplier;
         EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_DAY_START);
-        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
+     
     }
 
     private void DeconstructPotion()
@@ -59,15 +61,13 @@ public class GameLoopManager : MonoBehaviour
 
         ComponentDirector.Instance.ProcessStage(this.difficulty, incorrectRecipe);
         ComponentDirector.Instance.setComponentsEditable(false);
-
-        //call camera transition here
+        
 
     }
 
     private void StartStage()
     {
         ComponentDirector.Instance.setComponentsEditable(true);
-        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
     }
 
     private void OnPotionSubmission(Parameters p)
