@@ -1,3 +1,5 @@
+using Palmmedia.ReportGenerator.Core.Reporting.Builders;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +11,9 @@ public class TransformBottle : MonoBehaviour
     private bool isFloat;
     public bool triggerCam;
 
+
+    
+
     private void Awake()
     {
         this.topThreshold = this.transform.position.y - 1.7f;
@@ -19,9 +24,7 @@ public class TransformBottle : MonoBehaviour
 
     private void levitateObject()
     { 
-        if (Input.GetMouseButtonDown(0) && !this.isFloat) {
-             this.isFloat = true;
-        }
+        
        
         if (isFloat)
         {
@@ -35,9 +38,12 @@ public class TransformBottle : MonoBehaviour
             }
             else if (this.transform.position.y >= this.topThreshold)
             {
-                this.triggerCam = true;
+                StartCoroutine(delayedAction(1.5f, () => {
+                    this.triggerCam = true;
+                    gameObject.SetActive(false);
+                    })
+                );
                 this.isFloat = false;
-                
             }
         }
 
@@ -46,12 +52,31 @@ public class TransformBottle : MonoBehaviour
         
     }
 
+
+    private IEnumerator delayedAction(float duration, Action action)
+    {
+        yield return new WaitForSeconds(duration);
+        action?.Invoke();
+        
+    }
+
+
+    private void Start()
+    {
+        StartCoroutine(delayedAction(3.5f, () => { this.isFloat = true; }));
+    }
+
     private void handleHalo()
     {
         this.glow.SetActive(true);
         Light bottleGlow = this.glow.GetComponent<Light>();
         bottleGlow.range += 2.5f * Time.deltaTime;
         
+    }
+
+    private void OnDisable()
+    {
+        //remove observer here
     }
 
     // Update is called once per frame

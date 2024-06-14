@@ -12,16 +12,19 @@ public class TriggerCameraPan : MonoBehaviour
     private float rotateThreshold = 3.3f;
     private bool willLookAtTable = true;
     
-
+  
     // Update is called once per frame
     void Update()
     {
       
         Vector3 pos = this.transform.eulerAngles;
 
-        if (this.bottleScript.triggerCam && pos.x >= -60.0f)
-        {
+        print(pos.x);
+        if (this.bottleScript.triggerCam && (pos.x >= 300f || pos.x <= 15f)) {
+
+
             pos.x -= Time.deltaTime * rotateSpeed;
+
         }
         else if (!this.bottleScript.triggerCam && pos.x <= 0.0f)
         {
