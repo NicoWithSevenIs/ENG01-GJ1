@@ -10,6 +10,7 @@ public class TransformBottle : MonoBehaviour
     private bool isFloat;
     public bool triggerCam;
 
+    Rigidbody rb;
 
     private void Awake()
     {
@@ -20,6 +21,12 @@ public class TransformBottle : MonoBehaviour
     }
 
    
+    private void Start()
+    {
+        rb = this.gameObject.GetComponent<Rigidbody>();
+        StartCoroutine(delayedAction(2f, () => { this.isFloat = true; }));
+    }
+   
 
     private void levitateObject()
     { 
@@ -27,37 +34,37 @@ public class TransformBottle : MonoBehaviour
        
         if (isFloat)
         {
-            Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
             if (this.transform.position.y < this.topThreshold)
             {
                 float velocityY = (20.5f * Time.deltaTime);
                 rb.velocity = new Vector3(rb.velocity.x, velocityY, rb.velocity.z);
                 //this.transform.position = new Vector3(this.transform.position.x, positionY, this.transform.position.z);
-                
+
                 rb.useGravity = false;
                 this.handleHalo();
             }
             else if (this.transform.position.y >= this.topThreshold)
             {
-                StartCoroutine(delayedAction
-                    (1.25f, () =>
-                        {
-                            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
-                            StartCoroutine(delayedAction(0.5f, () => { 
-                                    EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_START);
-                                    gameObject.SetActive(false);
-                            }));
-                        }
-                    )
-                );
+            
+             
+                Action a = () => {
+                    StartCoroutine(delayedAction(0.5f, () => {
+                        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_START);
+                        gameObject.SetActive(false);
+                        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
+
+                    }));
+                };
+
+                StartCoroutine(delayedAction(0.75f, a));
                 this.isFloat = false;
             }
         }
 
-        //Debug.Log("top threshold: " + this.topThreshold);
-        //Debug.Log("position y: " + this.transform.position.y);
+   
         
     }
+
 
 
     private IEnumerator delayedAction(float duration, Action action)
@@ -68,12 +75,6 @@ public class TransformBottle : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        //EventBroadcaster.Instance.
-        StartCoroutine(delayedAction(3.5f, () => { this.isFloat = true; }));
-
-    }
 
     private void handleHalo()
     {
@@ -89,7 +90,7 @@ public class TransformBottle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
             this.levitateObject();
     }

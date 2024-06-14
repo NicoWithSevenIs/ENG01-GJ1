@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d7063befa58b342ab8aa9803946077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDuration: 20
+  maxDuration: 60
   timeElapsed: 0
 --- !u!1 &887005513
 GameObject:
@@ -1639,13 +1639,14 @@ GameObject:
   - component: {fileID: 938673820}
   - component: {fileID: 938673819}
   - component: {fileID: 938673818}
+  - component: {fileID: 938673821}
   m_Layer: 5
   m_Name: SubmitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &938673817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1658,11 +1659,11 @@ RectTransform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 226917346}
+  m_Father: {fileID: 1788824906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 164.16, y: 0}
+  m_AnchoredPosition: {x: 164.16, y: 103}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &938673818
@@ -1709,13 +1710,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 938673821}
+        m_TargetAssemblyTypeName: SubmitUI, Assembly-CSharp
+        m_MethodName: InvokeSubmission
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1759,6 +1760,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938673816}
   m_CullTransparentMesh: 1
+--- !u!114 &938673821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938673816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590514ee1bb19bf46ad53a52ae064bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2842,6 +2855,56 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1788824905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1788824906}
+  - component: {fileID: 1788824907}
+  m_Layer: 5
+  m_Name: SubmitManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1788824906
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788824905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 938673817}
+  m_Father: {fileID: 226917346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1788824907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788824905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a2d49c8fe75b849a1b1e65171e915e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  submitButton: {fileID: 938673816}
 --- !u!43 &1803595800
 Mesh:
   m_ObjectHideFlags: 0
@@ -3444,7 +3507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 50
-  zoomDistance: 0.9
+  zoomDistance: 1
   zoomSpeed: 10
 --- !u!1 &1973441134
 GameObject:
@@ -4606,8 +4669,8 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 1130298969}
     - targetCorrespondingSourceObject: {fileID: 3132130179374238022, guid: c18fc6b0d80ec3c4cb68ef1535481a47, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 938673817}
+      insertIndex: -1
+      addedObject: {fileID: 1788824906}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c18fc6b0d80ec3c4cb68ef1535481a47, type: 3}
 --- !u!1001 &5832676132556388346

@@ -81,9 +81,13 @@ public class GameLoopManager : MonoBehaviour
         bool isForced = p.GetBoolExtra("IS_FORCED", false);
 
         float percentCompletion = 1f;
-        RecipeGenerator.crosscheckRecipe(ComponentDirector.Instance.WorkAreaContainer, this.correctRecipe, out percentCompletion);
 
-        if (!isForced && percentCompletion != 1f)
+     
+        bool isCorrect = RecipeGenerator.crosscheckRecipe(ComponentDirector.Instance.WorkAreaContainer, this.correctRecipe, out percentCompletion);
+
+        print("Percent Completion: " + percentCompletion);
+
+        if (!isForced && (!isCorrect || percentCompletion != 1f))
         {
             print("Recipe Wrong");
             return;
@@ -93,7 +97,8 @@ public class GameLoopManager : MonoBehaviour
         {
             print("Time's Up");
         }
-        else
+        
+        if(isCorrect && percentCompletion == 1f)
         {
             print("Good Job!");
         }
