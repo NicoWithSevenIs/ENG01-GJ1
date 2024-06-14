@@ -16,7 +16,7 @@ public class TransformBottle : MonoBehaviour
 
     private void Awake()
     {
-        this.topThreshold = this.transform.position.y - 1.7f;
+        this.topThreshold = this.transform.position.y - 1.9f;
         this.isFloat = false;
         this.triggerCam = false;
         //this.glow.SetActive(false);
@@ -31,8 +31,10 @@ public class TransformBottle : MonoBehaviour
             Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
             if (this.transform.position.y < this.topThreshold)
             {
-                float positionY = this.transform.position.y + (0.5f * Time.deltaTime);
-                this.transform.position = new Vector3(this.transform.position.x, positionY, this.transform.position.z);
+                float velocityY = (20.5f * Time.deltaTime);
+                rb.velocity = new Vector3(rb.velocity.x, velocityY, rb.velocity.z);
+                //this.transform.position = new Vector3(this.transform.position.x, positionY, this.transform.position.z);
+                
                 rb.useGravity = false;
                 this.handleHalo();
             }
@@ -70,7 +72,7 @@ public class TransformBottle : MonoBehaviour
     {
         this.glow.SetActive(true);
         Light bottleGlow = this.glow.GetComponent<Light>();
-        bottleGlow.range += 2.5f * Time.deltaTime;
+        bottleGlow.range += 0.47f * Time.deltaTime;
         
     }
 
