@@ -35,6 +35,18 @@ public class ComponentDirector : MonoBehaviour
         return builder.Blueprint;
     }
 
+    //panic method :V running out of time
+    public void ClearBatch()
+    {
+        foreach (var component in componentPool)
+        {
+            LevitateComponent lev = component.GetComponent<LevitateComponent>();
+            if (lev != null)
+                Destroy(lev);
+            this.setPoolableInactive(component);
+        }
+           
+    }
     public void ProcessStage(int difficulty, List<string> incorrectRecipe)
     {
         
