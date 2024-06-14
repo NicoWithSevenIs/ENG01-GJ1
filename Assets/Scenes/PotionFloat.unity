@@ -900,7 +900,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1604,9 +1604,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potion: {fileID: 401278763749582852}
+  bottle: {fileID: 0}
   correctRecipe: []
   incorrectRecipe: []
-  difficulty: 1
+  difficulty: 10
   quotaMultiplier: 1
   dailyProfit: 0
   dailyQuota: 0
@@ -2011,7 +2012,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3268,7 +3269,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3717,7 +3718,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4479,7 +4480,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topThreshold: 0
   glow: {fileID: 175440303}
+  isFloat: 0
   triggerCam: 0
+  hasBeenPurfied: 0
+  willFling: 0
 --- !u!4 &401278763749582854 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1730925933924008025, guid: 2340ada61e858874b86b0eb39617e722, type: 3}

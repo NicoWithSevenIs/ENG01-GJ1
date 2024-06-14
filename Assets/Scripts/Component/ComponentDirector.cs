@@ -38,13 +38,17 @@ public class ComponentDirector : MonoBehaviour
     //panic method :V running out of time
     public void ClearBatch()
     {
-        foreach (var component in componentPool)
+
+        while(WorkAreaContainer.transform.childCount > 0)
         {
-            LevitateComponent lev = component.GetComponent<LevitateComponent>();
+            Transform c = WorkAreaContainer.transform.GetChild(0);
+            LevitateComponent lev = c.gameObject.GetComponent<LevitateComponent>();
             if (lev != null)
                 Destroy(lev);
-            this.setPoolableInactive(component);
+            this.setPoolableInactive(c.gameObject);
+
         }
+     
            
     }
     public void ProcessStage(int difficulty, List<string> incorrectRecipe)
@@ -57,8 +61,8 @@ public class ComponentDirector : MonoBehaviour
         foreach (var componentName in incorrectRecipe)
         {
             Vector3 pos = poolableContainer.transform.position;
-            pos.x += Random.Range(-0.5f, 0.5f);
-            pos.z += Random.Range(-0.5f, 0.5f);
+            pos.x += Random.Range(-0.25f, 0.25f);
+            pos.z += Random.Range(-0.25f, 0.25f);
 
             GameObject component = this.getPoolableInstance(componentName, pos);
           

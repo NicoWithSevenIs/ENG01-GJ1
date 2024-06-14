@@ -109,8 +109,9 @@ public class TriggerCameraPan : MonoBehaviour
             }
             else
             {
+                print("Called UP here");
                 EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END);
-                isZooming= false;
+                isZooming = false;
             }
         }
         else
@@ -125,7 +126,6 @@ public class TriggerCameraPan : MonoBehaviour
             {
                 isRotating = true;
                 isRotationReversed = true;
-                print("ok");
                 isZooming = false;
             }
         }
