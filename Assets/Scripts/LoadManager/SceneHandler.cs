@@ -8,7 +8,9 @@ public class SceneHandler : MonoBehaviour
     
     public void LoadGameProper()
     {
+        Debug.Log("called load game proper.");
         SceneManager.LoadScene("PotionFloat");
+        
     }
 
     public void LoadTitle()
@@ -31,14 +33,10 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene("NextDay");
     }
 
-    void Start()
+    public void QuitApplication()
     {
-        
+        Application.Quit();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

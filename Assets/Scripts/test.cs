@@ -13,6 +13,7 @@ public class test : MonoBehaviour
 
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(test))]
 public class testEditor: Editor
 {
@@ -31,3 +32,4 @@ public class testEditor: Editor
 
     }
 }
+#endif
