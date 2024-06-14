@@ -26,8 +26,20 @@ public class TriggerCameraPan : MonoBehaviour
 
     public void TriggerCamera(Parameters p)
     {
-        isRotating = true;
-        isRotationReversed = p.GetBoolExtra("IS_REVERSED", false);
+
+
+        bool isReversed = p.GetBoolExtra("IS_REVERSED", false);
+       
+        if(!isReversed)
+        {
+            isRotating = true;
+            isRotationReversed = false;
+        }
+        else
+        {
+            isZooming = true;
+            isZoomingOut = true;
+        }
     }
 
     // Update is called once per frame
@@ -51,6 +63,7 @@ public class TriggerCameraPan : MonoBehaviour
             {
                 yDistanceBeforeZoom = transform.position.y;
                 isZooming = true;
+                isZoomingOut = false;
                 isRotating = false;
             }
         else
@@ -92,6 +105,20 @@ public class TriggerCameraPan : MonoBehaviour
             {
                 EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
                 isZooming= false;
+            }
+        }
+        else
+        {
+            if (Mathf.Abs(transform.position.y - yDistanceBeforeZoom) >= 0)
+            {
+                Vector3 pos = transform.position;
+                pos.y += Time.deltaTime * zoomSpeed;
+                transform.position = pos;
+            }
+            else
+            {
+                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+                isZooming = false;
             }
         }
 

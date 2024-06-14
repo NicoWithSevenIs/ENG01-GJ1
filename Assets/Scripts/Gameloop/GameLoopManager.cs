@@ -104,6 +104,11 @@ public class GameLoopManager : MonoBehaviour
 
         if(currentHour < maxWorkHour)
         {
+            //depth 1 chain
+            Parameters param = new Parameters();
+            p.PutExtra("IS_REVERSED", true);
+            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_START, param);
+
             currentHour++;
 
             //go through the next stage
