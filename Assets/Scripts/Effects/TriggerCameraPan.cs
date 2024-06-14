@@ -76,17 +76,24 @@ public class TriggerCameraPan : MonoBehaviour
 
     private void handleZoom()
     {
-        if(!isZooming) return;
+        if(!isZooming) 
+            return;
 
         if (!isZoomingOut)
         {
-            if(transform.position.y - yDistanceBeforeZoom < zoomDistance)
+            if(Mathf.Abs(transform.position.y - yDistanceBeforeZoom) < zoomDistance)
             {
                 Vector3 pos = transform.position;
                 pos.y -= Time.deltaTime * zoomSpeed;
+                transform.position = pos;
+            }
+            else
+            {
+                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+                isZooming= false;
             }
         }
 
-        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+        
     }
 }
