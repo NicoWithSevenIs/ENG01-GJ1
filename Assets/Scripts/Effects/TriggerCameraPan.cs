@@ -20,14 +20,21 @@ public class TriggerCameraPan : MonoBehaviour
 
     private void Awake()
     {
-        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_CAMERA_PAN_START, TriggerCamera);
-
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_START, LookAtTable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_START, LookAwayFromTable);
     }
 
-    public void TriggerCamera(Parameters p)
+    public void LookAtTable()
     {
         isRotating = true;
-        isRotationReversed = p.GetBoolExtra("IS_REVERSED", false);
+        isRotationReversed = false;
+    }
+    public void LookAwayFromTable()
+    {
+       // print("Invoked");
+        isZooming = true;
+        isZoomingOut = true;
+        isRotationReversed = true;
     }
 
     // Update is called once per frame
@@ -51,6 +58,7 @@ public class TriggerCameraPan : MonoBehaviour
             {
                 yDistanceBeforeZoom = transform.position.y;
                 isZooming = true;
+                isZoomingOut = false;
                 isRotating = false;
             }
         else
@@ -64,11 +72,14 @@ public class TriggerCameraPan : MonoBehaviour
             {
                 EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
                 isRotating = false;
+
+               EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_END);
+        
             }
             */
         }
 
-  
+
 
         transform.eulerAngles = pos;
         
@@ -90,8 +101,22 @@ public class TriggerCameraPan : MonoBehaviour
             }
             else
             {
-                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END);
                 isZooming= false;
+            }
+        }
+        else
+        {
+            if (Mathf.Abs(transform.position.y - yDistanceBeforeZoom) >= 0)
+            {
+                Vector3 pos = transform.position;
+                pos.y += Time.deltaTime * zoomSpeed;
+                transform.position = pos;
+            }
+            else
+            {
+                isRotating = true;
+                isZooming = false;
             }
         }
 

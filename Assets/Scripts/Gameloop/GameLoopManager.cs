@@ -32,8 +32,9 @@ public class GameLoopManager : MonoBehaviour
     {
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_POTION_SUBMISSION, OnPotionSubmission);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_STAGE_START, DeconstructPotion);
-        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_CAMERA_PAN_END, StartStage);
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END, StartStage);
         this.totalProfit = 0f;
+        this.currentHour = 0;
     }
 
 
@@ -96,10 +97,10 @@ public class GameLoopManager : MonoBehaviour
         {
             print("Good Job!");
         }
-           
 
 
-        
+        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_START);
+
         this.dailyProfit = 300 * (1 + 1/(10-difficulty)) * percentCompletion;
 
         if(currentHour < maxWorkHour)
