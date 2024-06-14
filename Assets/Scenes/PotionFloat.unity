@@ -4324,6 +4324,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1127252602932910498, guid: c18fc6b0d80ec3c4cb68ef1535481a47, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: b6f59b5dbc1041941b8d18c94b7fe759, type: 3}
     - target: {fileID: 3132130179374238022, guid: c18fc6b0d80ec3c4cb68ef1535481a47, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4404,6 +4408,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3945395884503198654, guid: c18fc6b0d80ec3c4cb68ef1535481a47, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 6ad990a84accfee42948d45c44d548c1, type: 3}
     - target: {fileID: 5604457358497957945, guid: c18fc6b0d80ec3c4cb68ef1535481a47, type: 3}
       propertyPath: m_Name
       value: Game UI with Scrolling
