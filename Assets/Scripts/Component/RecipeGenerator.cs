@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public static  class RecipeGenerator {
+public static class RecipeGenerator {
 
     /*
        Balancing Spreadsheet:
@@ -55,7 +55,7 @@ public static  class RecipeGenerator {
 
 
 
-    public static List<string> createIncorrectRecipe(ComponentBlueprint blueprint, List<string> correctRecipe, int difficulty)
+    public static List<string> CreateIncorrectRecipe(ComponentBlueprint blueprint, List<string> correctRecipe, int difficulty)
     {
         List<string> newList = new List<string>(correctRecipe);
 

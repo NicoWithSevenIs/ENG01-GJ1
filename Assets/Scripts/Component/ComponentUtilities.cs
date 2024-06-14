@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComponentUtilities
+public static class ComponentUtilities
 {
     public static int getBaseComponentCount(ComponentData component)
     {

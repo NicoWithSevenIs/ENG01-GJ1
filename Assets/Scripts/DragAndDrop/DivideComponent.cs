@@ -50,11 +50,6 @@ public class DivideComponent : MonoBehaviour
         return false;
     }
 
-    private void Awake()
-    {
-
-    }
-
     private void Update()
     {
         if (this.checkComponentRightClick())
