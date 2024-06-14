@@ -21,6 +21,7 @@ public class TriggerCameraPan : MonoBehaviour
     private void Awake()
     {
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_CAMERA_PAN_START, TriggerCamera);
+
     }
 
     public void TriggerCamera(Parameters p)
