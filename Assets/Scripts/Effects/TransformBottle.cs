@@ -7,17 +7,19 @@ public class TransformBottle : MonoBehaviour
     [SerializeField] private float topThreshold;
     [SerializeField] private GameObject glow;
     private bool isFloat;
-    
+    public bool triggerCam;
+
     private void Awake()
     {
         this.topThreshold = this.transform.position.y - 1.7f;
         this.isFloat = false;
+        this.triggerCam = false;
         //this.glow.SetActive(false);
     }
 
     private void levitateObject()
     { 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && !this.isFloat) {
              this.isFloat = true;
         }
        
@@ -33,7 +35,7 @@ public class TransformBottle : MonoBehaviour
             }
             else if (this.transform.position.y >= this.topThreshold)
             {
-                
+                this.triggerCam = true;
                 this.isFloat = false;
                 
             }
@@ -51,6 +53,7 @@ public class TransformBottle : MonoBehaviour
         bottleGlow.range += 2.5f * Time.deltaTime;
         
     }
+
     // Update is called once per frame
     void Update()
     {
