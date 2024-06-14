@@ -36,6 +36,7 @@ public class ComponentData : ScriptableObject
 
 }
 
+#if UNITY_EDITOR 
 [CustomEditor(typeof(ComponentData))]
 public class ComponentData_Editor : Editor
 {
@@ -78,4 +79,4 @@ public class ComponentData_Editor : Editor
         }
     }
 }
-
+#endif

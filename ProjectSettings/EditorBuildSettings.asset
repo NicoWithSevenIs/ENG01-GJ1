@@ -4,5 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 2728a7c310eb47b45a40b064fc5441f6
+  - enabled: 1
+    path: Assets/Scenes/PotionFloat.unity
+    guid: d0c68a415b46d3b43906fcb5bf9b0f5d
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
