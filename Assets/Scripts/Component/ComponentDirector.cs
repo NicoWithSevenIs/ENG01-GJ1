@@ -17,6 +17,8 @@ public class ComponentDirector : MonoBehaviour
     [SerializeField] private Transform poolableContainer;
     [SerializeField] private GameObject workAreaContainer;
 
+    public GameObject WorkAreaContainer { get { return workAreaContainer; } }
+
     private void Start()
     {
         componentPool = new List<GameObject>();
@@ -33,11 +35,8 @@ public class ComponentDirector : MonoBehaviour
         return builder.Blueprint;
     }
 
-    public void ProcessStage(Parameters p)
+    public void ProcessStage(int difficulty, List<string> incorrectRecipe)
     {
-
-        int difficulty = p.GetIntExtra("DIFFICULTY", 1);
-        List<string> incorrectRecipe = p.GetArrayListExtra("INCORRECT_RECIPE").Cast<string>().ToList();
         
         foreach (var component in componentPool)
             Destroy(component);
@@ -53,6 +52,14 @@ public class ComponentDirector : MonoBehaviour
           
         }
 
+    }
+
+    public void setComponentsEditable(bool flag)
+    {
+        foreach(var component in componentPool)
+        {
+            component.GetComponent<ComponentScript>().enabled = flag;
+        }
     }
 
     #region ObjectPooling
@@ -139,8 +146,6 @@ public class ComponentDirector : MonoBehaviour
         if(Instance == null)
             Instance = this;
         else Destroy(this.gameObject);
-
-        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_STAGE_START, this.ProcessStage);
     }
 
     #endregion

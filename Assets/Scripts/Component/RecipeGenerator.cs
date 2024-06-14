@@ -189,28 +189,15 @@ public static class RecipeGenerator {
         return newList;
     }
 
-    public static void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
-    {    
-        if (dropOrigin.transform.childCount > 0)
-        {
-            bool match = RecipeGenerator.crosscheckRecipe(dropOrigin, correctRecipe);
-            if (match)
-            {
-                Debug.Log("NO impurities found.");
-            }
-            else
-            {
-                Debug.Log("impurities FOUND.");
-            }
-        }
-    }
+  
+   
 
-    private static bool crosscheckRecipe(GameObject dropOrigin, List<string> correctRecipe)
+    public static bool crosscheckRecipe(GameObject workArea, List<string> correctRecipe, out float percentageCompletion)
     {
 
         List<string> contentNames = new List<string>();
 
-        foreach (Transform child in dropOrigin.transform)
+        foreach (Transform child in workArea.transform)
         {
             ComponentData data = child.transform.gameObject.GetComponent<ComponentScript>()?.Data;
 
@@ -233,7 +220,11 @@ public static class RecipeGenerator {
             }
         }
 
+        percentageCompletion = (float)(contentNames.Count - temp.Count) / correctRecipe.Count;
+
         return contentNames.Count == correctRecipe.Count && temp.Count == 0;
     }
+
+
 
 }

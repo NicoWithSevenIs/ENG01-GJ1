@@ -30,6 +30,8 @@ public class GameLoopManager : MonoBehaviour
     }
 
 
+
+
     public void StartDay()
     {
         this.dailyProfit = 0f;
@@ -53,30 +55,37 @@ public class GameLoopManager : MonoBehaviour
         }
         Debug.Log("Correct Recipe: " + s);
 
-        
-        Parameters parameters = new Parameters();
-        parameters.PutExtra("DIFFICULTY", this.difficulty);
-        parameters.PutExtra("INCORRECT_RECIPE", new ArrayList(this.incorrectRecipe));
 
-        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START, parameters);
+        ComponentDirector.Instance.ProcessStage(this.difficulty, incorrectRecipe);
+        ComponentDirector.Instance.setComponentsEditable(false);
 
+        //call camera transition here
+
+    }
+
+    private void StartStage()
+    {
+        ComponentDirector.Instance.setComponentsEditable(true);
+        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
     }
 
     private void OnPotionSubmission(Parameters p)
     {
         bool isForced = p.GetBoolExtra("IS_FORCED", false);
 
+        float percentCompletion = 1f;
+        RecipeGenerator.crosscheckRecipe(ComponentDirector.Instance.WorkAreaContainer, this.correctRecipe, out percentCompletion);
 
-        //each potion's base price is 300 * (1 + 1/difficulty)
-        //check for potion accuracy
-        //reduce the price accordingly
-        //addItToDailyProfits
+        if (!isForced && percentCompletion != 1f)
+            return;
 
+        this.dailyProfit = 300 * (1 + 1/difficulty) * percentCompletion;
 
         if(currentHour < maxWorkHour)
         {
             currentHour++;
-            //this.DeconstructPotion();
+            
+            //loop through potion
         }
         else
         {
@@ -96,6 +105,8 @@ public class GameLoopManager : MonoBehaviour
         }
 
         this.quotaMultiplier *= 1.1f + 1f / difficulty;
+        //temp
+        difficulty += Mathf.Clamp(UnityEngine.Random.Range(1/difficulty, 3), 1, 10);
         this.daysWorking++;
     }
 

@@ -11,4 +11,9 @@ public class GameTimer : Timer
         p.PutExtra("IS_FORCED", true);
         EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_POTION_SUBMISSION, p);
     }
+
+    private void Awake()
+    {
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_STAGE_START, this.StartTimer);
+    }
 }

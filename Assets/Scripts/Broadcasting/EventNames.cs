@@ -70,7 +70,7 @@ public class EventNames {
 		public const string ON_STAGE_START = "ON_STAGE_START";
 		public const string ON_DAY_END = "ON_DAY_END";
 		public const string ON_DAY_START = "ON_DAY_START";
-		public const string ON_POTION_SUBMISSION = "";
+		public const string ON_POTION_SUBMISSION = "ON_POTION_SUBMISSION";
 	}
 
 }
