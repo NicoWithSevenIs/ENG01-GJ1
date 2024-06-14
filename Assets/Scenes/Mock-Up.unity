@@ -463,7 +463,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 1
-  m_Flare: {fileID: 0}
+  m_Flare: {fileID: 12100000, guid: 54fbbf098d116effa00081aba8ad6659, type: 2}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
@@ -683,6 +683,7 @@ PrefabInstance:
     - {fileID: 3178011221741003989, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
     - {fileID: 2324369753152960501, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
     - {fileID: 7346608041307489191, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
+    - {fileID: 3929498900085353021, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1730925933924008025, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       insertIndex: -1
