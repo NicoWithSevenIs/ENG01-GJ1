@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
         this.timeElapsed += Time.deltaTime;
         this.onTick();
 
-        if (this.timeElapsed > this.maxDuration)
+        if (this.timeElapsed >= this.maxDuration)
         {
             this.StopTimer();
             this.onElapse();
@@ -35,7 +35,9 @@ public class Timer : MonoBehaviour
     protected virtual void onTick() {
         Debug.Log("This is being invoked instead");
     }
-    protected virtual void onElapse(){}
+    protected virtual void onElapse(){
+        Debug.Log("This is being invoked instead");
+    }
 
     public void StartTimer()
     {

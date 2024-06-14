@@ -9,6 +9,9 @@ public class GameLoopManager : MonoBehaviour
 {
 
     [SerializeField] private List<string> correctRecipe;
+
+    public List<string> CorrectRecipe { get { return correctRecipe; } }
+
     [SerializeField] private List<string> incorrectRecipe;
 
     [Range(1,10)]
@@ -80,7 +83,20 @@ public class GameLoopManager : MonoBehaviour
         RecipeGenerator.crosscheckRecipe(ComponentDirector.Instance.WorkAreaContainer, this.correctRecipe, out percentCompletion);
 
         if (!isForced && percentCompletion != 1f)
+        {
+            print("Recipe Wrong");
             return;
+        }
+
+        if(isForced && percentCompletion != 1f)
+        {
+            print("Time's Up");
+        }
+        else
+        {
+            print("Good Job!");
+        }
+           
 
 
         
