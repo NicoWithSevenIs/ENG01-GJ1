@@ -25,7 +25,6 @@ public class GameTimer : Timer
 
     protected override void onTick()
     {
-        Debug.Log("Invoking");
         Parameters p = new Parameters();
         p.PutExtra("PROGRESS", this.getPercentageCompletion());
 
