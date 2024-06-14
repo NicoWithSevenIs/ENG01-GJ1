@@ -5,6 +5,12 @@ using UnityEngine.UIElements;
 
 public class GameTimer : Timer
 {
+
+    protected override void Start()
+    {
+        base.Start();
+        this.StartTimer();
+    }
     protected override void onElapse()
     {
         Parameters p = new Parameters();
@@ -16,4 +22,14 @@ public class GameTimer : Timer
     {
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_STAGE_START, this.StartTimer);
     }
+
+    protected override void onTick()
+    {
+        Debug.Log("Invoking");
+        Parameters p = new Parameters();
+        p.PutExtra("PROGRESS", this.getPercentageCompletion());
+
+        EventBroadcaster.Instance.PostEvent(EventNames.Timer.ON_TIMER_TICK, p);
+    }
+
 }

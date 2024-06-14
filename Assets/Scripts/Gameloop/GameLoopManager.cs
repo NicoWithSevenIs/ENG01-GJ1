@@ -80,14 +80,16 @@ public class GameLoopManager : MonoBehaviour
         if (!isForced && percentCompletion != 1f)
             return;
 
-        this.dailyProfit = 300 * (1 + 1/difficulty) * percentCompletion;
+
+        
+        this.dailyProfit = 300 * (1 + 1/(10-difficulty)) * percentCompletion;
 
         if(currentHour < maxWorkHour)
         {
             currentHour++;
 
             //go through the next stage
-            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
+            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_END);
         }
         else
         {

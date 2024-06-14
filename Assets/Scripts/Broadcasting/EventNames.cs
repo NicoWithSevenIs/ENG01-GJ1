@@ -63,12 +63,14 @@ public class EventNames {
 	public class Timer
 	{
 		public const string ON_TIMER_ELAPSE = "ON_TIMER_ELAPSE";
+		public const string ON_TIMER_TICK = "ON_TIMER_TICK";
 	}
 
 	public class Game_Loop
 	{
 		public const string ON_STAGE_START = "ON_STAGE_START";
-		public const string ON_DAY_END = "ON_DAY_END";
+        public const string ON_STAGE_END = "ON_STAGE_END";
+        public const string ON_DAY_END = "ON_DAY_END";
 		public const string ON_DAY_START = "ON_DAY_START";
 		public const string ON_POTION_SUBMISSION = "ON_POTION_SUBMISSION";
 	}

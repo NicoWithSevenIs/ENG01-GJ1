@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField] protected float maxDuration = 10f;
-    protected float timeElapsed;
+    [SerializeField] protected float timeElapsed;
     protected bool isRunning;
 
-    protected void Start()
+    protected virtual void Start()
     {
         this.StopTimer();
      
@@ -21,6 +22,7 @@ public class Timer : MonoBehaviour
             return;
 
         this.timeElapsed += Time.deltaTime;
+        this.onTick();
 
         if (this.timeElapsed > this.maxDuration)
         {
@@ -30,6 +32,9 @@ public class Timer : MonoBehaviour
 
     }
 
+    protected virtual void onTick() {
+        Debug.Log("This is being invoked instead");
+    }
     protected virtual void onElapse(){}
 
     public void StartTimer()
