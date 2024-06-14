@@ -20,26 +20,21 @@ public class TriggerCameraPan : MonoBehaviour
 
     private void Awake()
     {
-        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_CAMERA_PAN_START, TriggerCamera);
-
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_START, LookAtTable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_START, LookAwayFromTable);
     }
 
-    public void TriggerCamera(Parameters p)
+    public void LookAtTable()
     {
-
-
-        bool isReversed = p.GetBoolExtra("IS_REVERSED", false);
-       
-        if(!isReversed)
-        {
-            isRotating = true;
-            isRotationReversed = false;
-        }
-        else
-        {
-            isZooming = true;
-            isZoomingOut = true;
-        }
+        isRotating = true;
+        isRotationReversed = false;
+    }
+    public void LookAwayFromTable()
+    {
+       // print("Invoked");
+        isZooming = true;
+        isZoomingOut = true;
+        isRotationReversed = true;
     }
 
     // Update is called once per frame
@@ -77,11 +72,14 @@ public class TriggerCameraPan : MonoBehaviour
             {
                 EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
                 isRotating = false;
+
+               EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_END);
+        
             }
             */
         }
 
-  
+
 
         transform.eulerAngles = pos;
         
@@ -103,7 +101,7 @@ public class TriggerCameraPan : MonoBehaviour
             }
             else
             {
-                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END);
                 isZooming= false;
             }
         }
@@ -117,7 +115,7 @@ public class TriggerCameraPan : MonoBehaviour
             }
             else
             {
-                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+                isRotating = true;
                 isZooming = false;
             }
         }

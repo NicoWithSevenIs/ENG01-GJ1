@@ -6,11 +6,6 @@ using UnityEngine.UIElements;
 public class GameTimer : Timer
 {
 
-    protected override void Start()
-    {
-        base.Start();
-        this.StartTimer();
-    }
     protected override void onElapse()
     {
         Parameters p = new Parameters();
@@ -20,7 +15,7 @@ public class GameTimer : Timer
 
     private void Awake()
     {
-        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_STAGE_START, this.StartTimer);
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END, this.StartTimer);
     }
 
     protected override void onTick()

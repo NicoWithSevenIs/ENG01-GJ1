@@ -69,11 +69,17 @@ public class EventNames {
 	public class Game_Loop
 	{
 		public const string ON_STAGE_START = "ON_STAGE_START";
-		public const string ON_CAMERA_PAN_START = "ON_CAMERA_PAN_START";
-		public const string ON_CAMERA_PAN_END = "ON_CAMERA_PAN_END";
+		public const string ON_ENTRY_CAMERA_PAN_START = "ON_ENTRY_CAMERA_PAN_START";
+		public const string ON_ENTRY_CAMERA_PAN_END = "ON_ENTRY_CAMERA_PAN_END";
+		
+
         public const string ON_STAGE_END = "ON_STAGE_END";
+        public const string ON_EXIT_CAMERA_PAN_START = "ON_EXIT_CAMERA_PAN_START";
+        public const string ON_EXIT_CAMERA_PAN_END = "ON_EXIT_CAMERA_PAN_END";
+
         public const string ON_DAY_END = "ON_DAY_END";
 		public const string ON_DAY_START = "ON_DAY_START";
+
 		public const string ON_POTION_SUBMISSION = "ON_POTION_SUBMISSION";
 	}
 

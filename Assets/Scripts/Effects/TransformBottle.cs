@@ -44,9 +44,7 @@ public class TransformBottle : MonoBehaviour
                         {
                             EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
                             StartCoroutine(delayedAction(0.5f, () => { 
-                                    Parameters p = new Parameters();
-                                    p.PutExtra("IS_REVERSED", false);
-                                    EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_START, p);
+                                    EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_START);
                                     gameObject.SetActive(false);
                             }));
                         }
