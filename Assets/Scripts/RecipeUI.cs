@@ -26,9 +26,19 @@ public class RecipeUI : MonoBehaviour
     [SerializeField]
     List<GameObject> componentDisplays = new List<GameObject>();
 
+    [SerializeField]
+    List<Texture2D> textureRefs = new List<Texture2D>();
+
+    [SerializeField]
+    GameObject componentDisplayRef;
+
+    [SerializeField]
+    GameObject container;
+
     public void ShowRecipe()
     {
-        UpdateSheetSize();
+        //UpdateSheetSize();
+        this.updateRecipeListUI();
         HideRecipeTab();
         LeanTween
             .moveX(recipe, recipe.transform.position.x + 220.0f, 0.2f)
@@ -91,5 +101,42 @@ public class RecipeUI : MonoBehaviour
     public void SetComponentCount(int newComponentCount)
     {
         componentCount = newComponentCount;
+    }
+
+    private void updateRecipeListUI()
+    {
+        List<string> recipeCopy = GameLoopManager.Instance.CorrectRecipe;
+
+        for (int i = 0; i < recipeCopy.Count; i++)
+        {
+            GameObject recipeComponent = Instantiate(this.componentDisplayRef);
+            recipeComponent.transform.SetParent(this.container.transform);
+            recipeComponent.SetActive(true);
+            recipeComponent.GetComponent<RawImage>().texture = this.findTexture(recipeCopy[i]);
+            this.componentDisplays.Add(recipeComponent);
+        }
+
+        foreach (GameObject componentDisplay in componentDisplays)
+        {
+            //recipeSheet.GetComponent<Image>().overrideSprite = componentDisplay.GetComponent<RawImage>();
+        }
+    }
+
+    private Texture2D findTexture(string name)
+    {
+        for (int i = 0; i < this.textureRefs.Count; i++)
+        {
+            if (name == this.textureRefs[i].name)
+            {
+                return this.textureRefs[i];
+            } 
+        }
+
+        return null;
+    }
+
+    private void OnDestroy()
+    {
+        this.componentDisplays.Clear();
     }
 }
