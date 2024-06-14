@@ -42,7 +42,7 @@ public class TransformBottle : MonoBehaviour
             {
                 StartCoroutine(delayedAction
                     (1.25f, () =>
-                        { 
+                        {
                             EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
                             StartCoroutine(delayedAction(0.5f, () => { 
                                     Parameters p = new Parameters();
