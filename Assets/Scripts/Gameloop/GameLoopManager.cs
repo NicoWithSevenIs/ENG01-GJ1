@@ -8,9 +8,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(GameTimer))]
 public class GameLoopManager : MonoBehaviour
 {
-
-
     [SerializeField] private GameObject potion;
+    [SerializeField] private TransformBottle bottle;
     private Vector3 originalPosition;
 
     [SerializeField] private List<string> correctRecipe;
@@ -41,7 +40,7 @@ public class GameLoopManager : MonoBehaviour
         this.totalProfit = 0f;
         this.currentHour = 0;
         //this.difficulty = UnityEngine.Random.Range(1, 10);
-        this.originalPosition = potion.transform.position;
+        
     }
 
     public void StartDay()
@@ -72,13 +71,14 @@ public class GameLoopManager : MonoBehaviour
         ComponentDirector.Instance.ProcessStage(this.difficulty, incorrectRecipe);
         ComponentDirector.Instance.setComponentsEditable(false);
 
-
-        
+       
 
     }
 
     private void StartStage()
     {
+        this.originalPosition = potion.transform.position;
+
         ComponentDirector.Instance.setComponentsEditable(true);
         potion.SetActive(false);
         potion.transform.position = this.originalPosition;
@@ -120,6 +120,7 @@ public class GameLoopManager : MonoBehaviour
             child.gameObject.AddComponent<LevitateComponent>();
         }
 
+        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_WIN);
         StartCoroutine(delayedDeactivate());
        
 
@@ -132,12 +133,16 @@ public class GameLoopManager : MonoBehaviour
 
         ComponentDirector.Instance.ClearBatch();
 
-        SceneManager.LoadScene("Win");
+    
 
-        /*
+        potion.transform.position = this.originalPosition;
         potion.SetActive(true);
+        potion.GetComponent<TransformBottle>().disableLevitation();
 
+        yield return new WaitForSeconds(3f);
 
+        SceneManager.LoadScene("Win");
+        /*
         potion.GetComponent<TransformBottle>().hasBeenPurfied = true;
       
         potion.GetComponent<TransformBottle>().willFling = true;

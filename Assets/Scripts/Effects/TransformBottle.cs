@@ -34,6 +34,11 @@ public class TransformBottle : MonoBehaviour
         StartCoroutine(delayedAction(2f, () => { this.isFloat = true; }));
     }
    
+    public void disableLevitation()
+    {
+        isFloat = false;
+        rb.useGravity = true;
+    }
 
     private void levitateObject()
     {

@@ -81,6 +81,7 @@ public class EventNames {
 		public const string ON_DAY_START = "ON_DAY_START";
 
 		public const string ON_POTION_SUBMISSION = "ON_POTION_SUBMISSION";
+		public const string ON_WIN = "ON_WIN";
 	}
 
 }

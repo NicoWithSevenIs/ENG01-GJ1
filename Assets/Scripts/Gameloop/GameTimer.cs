@@ -16,6 +16,7 @@ public class GameTimer : Timer
     private void Awake()
     {
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END, this.StartTimer);
+        EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_WIN, this.StopTimer);
     }
 
     protected override void onTick()
