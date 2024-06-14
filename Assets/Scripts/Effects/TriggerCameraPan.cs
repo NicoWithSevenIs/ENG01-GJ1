@@ -21,16 +21,21 @@ public class TriggerCameraPan : MonoBehaviour
 
         print(pos.x);
         if (this.bottleScript.triggerCam && (pos.x >= 300f || pos.x <= 15f)) {
-
-
             pos.x -= Time.deltaTime * rotateSpeed;
-
         }
-        else if (!this.bottleScript.triggerCam && pos.x <= 0.0f)
+        else
+        {
+            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+            this.bottleScript.triggerCam = false;
+        }
+
+
+        /*
+        if (!this.bottleScript.triggerCam && pos.x <= 0.0f)
         {
             pos.x += Time.deltaTime * rotateSpeed;
                 
-        }
+        }*/
 
         transform.eulerAngles = pos;
         

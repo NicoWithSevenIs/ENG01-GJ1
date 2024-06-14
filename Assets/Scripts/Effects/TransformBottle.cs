@@ -40,10 +40,13 @@ public class TransformBottle : MonoBehaviour
             }
             else if (this.transform.position.y >= this.topThreshold)
             {
-                StartCoroutine(delayedAction(1.5f, () => {
-                    this.triggerCam = true;
-                    gameObject.SetActive(false);
-                    })
+                StartCoroutine(delayedAction
+                    (1.5f, () =>
+                        { 
+                            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
+                            StartCoroutine(delayedAction(0.5f, () => { this.triggerCam = true; }));
+                        }
+                    )
                 );
                 this.isFloat = false;
             }
@@ -65,7 +68,9 @@ public class TransformBottle : MonoBehaviour
 
     private void Start()
     {
+        //EventBroadcaster.Instance.
         StartCoroutine(delayedAction(3.5f, () => { this.isFloat = true; }));
+
     }
 
     private void handleHalo()
