@@ -222,10 +222,7 @@ public static class RecipeGenerator {
 
         percentageCompletion = (float)(contentNames.Count - temp.Count) / correctRecipe.Count;
 
-        Debug.Log("Children of Work Area: " + contentNames.Count);
-        Debug.Log("Correct Recipe: " + correctRecipe.Count);
-        Debug.Log("Remaining After REmoval: " + temp.Count);
-        Debug.Log("Yo");
+
 
         return contentNames.Count == correctRecipe.Count && temp.Count == 0;
     }

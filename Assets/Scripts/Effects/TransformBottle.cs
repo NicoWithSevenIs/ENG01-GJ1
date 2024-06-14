@@ -10,7 +10,9 @@ public class TransformBottle : MonoBehaviour
     private bool isFloat;
     public bool triggerCam;
 
-    Rigidbody rb;
+    private bool hasBeenPurfied = false;
+
+    private Rigidbody rb;
 
     private void Awake()
     {
@@ -29,8 +31,9 @@ public class TransformBottle : MonoBehaviour
    
 
     private void levitateObject()
-    { 
-        
+    {
+        if (hasBeenPurfied)
+            return;
        
         if (isFloat)
         {
@@ -46,7 +49,7 @@ public class TransformBottle : MonoBehaviour
             else if (this.transform.position.y >= this.topThreshold)
             {
             
-             
+                
                 Action a = () => {
                     StartCoroutine(delayedAction(0.5f, () => {
                         EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_START);
@@ -74,8 +77,6 @@ public class TransformBottle : MonoBehaviour
         
     }
 
-
-
     private void handleHalo()
     {
         this.glow.SetActive(true);
@@ -84,14 +85,8 @@ public class TransformBottle : MonoBehaviour
         
     }
 
-    private void OnDisable()
+    private void FixedUpdate()
     {
-        //remove observer here
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-            this.levitateObject();
+        this.levitateObject();
     }
 }

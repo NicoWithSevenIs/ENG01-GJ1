@@ -37,9 +37,6 @@ public class GameLoopManager : MonoBehaviour
         this.currentHour = 0;
     }
 
-
-
-
     public void StartDay()
     {
         this.dailyProfit = 0f;
@@ -106,21 +103,23 @@ public class GameLoopManager : MonoBehaviour
 
         EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_EXIT_CAMERA_PAN_START);
 
-        this.dailyProfit = 300 * (1 + 1/(10-difficulty)) * percentCompletion;
-
-        if(currentHour < maxWorkHour)
+        foreach(Transform child in ComponentDirector.Instance.WorkAreaContainer.transform)
         {
-            currentHour++;
+            child.gameObject.AddComponent<LevitateComponent>();
+        }
 
-            //go through the next stage
-            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_END);
-        }
-        else
-        {
-            currentHour = 0;
-            this.EndDay();
-        }
-        
+        StartCoroutine(delayedDeactivate());
+       
+
+    }
+
+    //AHHH RUSH FUNCTION
+    private  IEnumerator delayedDeactivate()
+    {
+        yield return new WaitForSeconds(5f);
+
+        ComponentDirector.Instance.ClearBatch();
+
     }
 
     private void EndDay()
