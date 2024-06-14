@@ -2097,7 +2097,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 10491632}
+  m_Mesh: {fileID: 884018513}
 --- !u!33 &1155590919
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -2795,6 +2795,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!4 &1735561438 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
+  m_PrefabInstance: {fileID: 401278763749582851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1806180298
 GameObject:
   m_ObjectHideFlags: 0
@@ -2850,16 +2855,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937187714}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.4056363, y: 1.8119979, z: -3.405839}
+  m_LocalScale: {x: 0.18374248, y: 0.18374248, z: 0.18374248}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 112215711}
   - {fileID: 1155590917}
   - {fileID: 1065473156}
   - {fileID: 1608789899}
-  m_Father: {fileID: 654381744}
+  m_Father: {fileID: 1735561438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1958822249
 GameObject:
@@ -2907,7 +2912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 50
-  zoomDistance: 3
+  zoomDistance: 1
   zoomSpeed: 10
 --- !u!1001 &59688384176203485
 PrefabInstance:
@@ -3060,15 +3065,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3606
+      value: 1.3969371
       objectReference: {fileID: 0}
     - target: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3606
+      value: 1.3969371
       objectReference: {fileID: 0}
     - target: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.3606
+      value: 1.3969371
       objectReference: {fileID: 0}
     - target: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3076,11 +3081,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.081
+      value: -0.097
       objectReference: {fileID: 0}
     - target: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: -0.053
       objectReference: {fileID: 0}
     - target: {fileID: 8912408603470785781, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       propertyPath: m_Name
@@ -3102,7 +3107,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3394744476133705805, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1806180299}
-    - targetCorrespondingSourceObject: {fileID: 3394744476133705805, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 3682840953701715529, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1937187715}
     - targetCorrespondingSourceObject: {fileID: 1730925933924008025, guid: 2340ada61e858874b86b0eb39617e722, type: 3}
