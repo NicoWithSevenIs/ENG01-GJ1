@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
 [RequireComponent(typeof(GameTimer))]
 public class GameLoopManager : MonoBehaviour
 {
+
+
+    [SerializeField] private GameObject potion;
+    private Vector3 originalPosition;
 
     [SerializeField] private List<string> correctRecipe;
 
@@ -35,6 +40,8 @@ public class GameLoopManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Loop.ON_ENTRY_CAMERA_PAN_END, StartStage);
         this.totalProfit = 0f;
         this.currentHour = 0;
+
+        this.originalPosition = potion.transform.position;
     }
 
     public void StartDay()
@@ -64,6 +71,8 @@ public class GameLoopManager : MonoBehaviour
 
         ComponentDirector.Instance.ProcessStage(this.difficulty, incorrectRecipe);
         ComponentDirector.Instance.setComponentsEditable(false);
+
+
         
 
     }
@@ -71,6 +80,8 @@ public class GameLoopManager : MonoBehaviour
     private void StartStage()
     {
         ComponentDirector.Instance.setComponentsEditable(true);
+        potion.SetActive(false);
+        potion.transform.position = this.originalPosition;
     }
 
     private void OnPotionSubmission(Parameters p)
@@ -116,7 +127,7 @@ public class GameLoopManager : MonoBehaviour
     //AHHH RUSH FUNCTION
     private  IEnumerator delayedDeactivate()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f);
 
         ComponentDirector.Instance.ClearBatch();
 
@@ -153,6 +164,8 @@ public class GameLoopManager : MonoBehaviour
             _instance = this;
         else GameObject.Destroy(gameObject);
     }
+
+  
 
     #endregion
 

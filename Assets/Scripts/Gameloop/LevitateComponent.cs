@@ -11,7 +11,7 @@ public class LevitateComponent : MonoBehaviour
 
     private bool isFloat;
 
-    private bool hasBeenPurfied = false;
+    public bool hasBeenPurfied = false;
 
     private Rigidbody rb;
 
