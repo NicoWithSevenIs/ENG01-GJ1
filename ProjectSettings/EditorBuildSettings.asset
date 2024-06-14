@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PotionFloat.unity
     guid: d0c68a415b46d3b43906fcb5bf9b0f5d
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 9b96f40d5a903e84da4bf51c1cb82704
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: b09a0803bbd47ae4786c73db12ae4b4f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

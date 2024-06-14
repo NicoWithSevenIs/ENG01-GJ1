@@ -28,9 +28,9 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    public void LoadNextDay()
+    public void LoadWin()
     {
-        SceneManager.LoadScene("NextDay");
+        SceneManager.LoadScene("Win");
     }
 
     public void QuitApplication()
