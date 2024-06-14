@@ -45,8 +45,8 @@ public class ComponentDirector : MonoBehaviour
         foreach (var componentName in incorrectRecipe)
         {
             Vector3 pos = poolableContainer.transform.position;
-            pos.x += Random.Range(-3f, 3f);
-            pos.z += Random.Range(-3f, 3f);
+            pos.x += Random.Range(-0.5f, 0.5f);
+            pos.z += Random.Range(-0.5f, 0.5f);
 
             GameObject component = this.getPoolableInstance(componentName, pos);
           

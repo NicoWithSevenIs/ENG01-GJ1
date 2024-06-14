@@ -22,8 +22,8 @@ public class DivideComponent : MonoBehaviour
         string componentBName = data.ComponentB.ComponentName;
     
        
-        ComponentDirector.Instance.getPoolableInstance(componentAName, position + Vector3.right);
-        ComponentDirector.Instance.getPoolableInstance(componentBName, position - Vector3.right);
+        ComponentDirector.Instance.getPoolableInstance(componentAName, position + Vector3.right * 0.3f);
+        ComponentDirector.Instance.getPoolableInstance(componentBName, position - Vector3.right * 0.3f);
         ComponentDirector.Instance.setPoolableInactive(currentObject);
 
     }

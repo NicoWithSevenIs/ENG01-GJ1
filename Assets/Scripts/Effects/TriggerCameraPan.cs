@@ -6,9 +6,17 @@ public class TriggerCameraPan : MonoBehaviour
 {
 
     [SerializeField] private float rotateSpeed = 20.0f;
+    [SerializeField] private float zoomDistance =  3f;
+    [SerializeField] private float zoomSpeed = 20f;
 
     private bool isRotating = false;
     private bool isRotationReversed = false;
+
+    private bool isZooming = false;
+    private bool isZoomingOut = false;
+
+    private float yDistanceBeforeZoom = 0f;
+
 
     private void Awake()
     {
@@ -25,6 +33,9 @@ public class TriggerCameraPan : MonoBehaviour
     void Update()
     {
 
+        handleZoom();
+
+
         if (!isRotating)
             return;
 
@@ -37,7 +48,8 @@ public class TriggerCameraPan : MonoBehaviour
             }
             else
             {
-                EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
+                yDistanceBeforeZoom = transform.position.y;
+                isZooming = true;
                 isRotating = false;
             }
         else
@@ -60,5 +72,21 @@ public class TriggerCameraPan : MonoBehaviour
         transform.eulerAngles = pos;
         
         
+    }
+
+    private void handleZoom()
+    {
+        if(!isZooming) return;
+
+        if (!isZoomingOut)
+        {
+            if(transform.position.y - yDistanceBeforeZoom < zoomDistance)
+            {
+                Vector3 pos = transform.position;
+                pos.y -= Time.deltaTime * zoomSpeed;
+            }
+        }
+
+        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_CAMERA_PAN_END);
     }
 }
