@@ -4,7 +4,7 @@ using System.Collections;
 /*
  * Holder for event names
  * Created By: NeilDG
- */ 
+ */
 public class EventNames {
 	public const string ON_UPDATE_SCORE = "ON_UPDATE_SCORE";
 	public const string ON_CORRECT_MATCH = "ON_CORRECT_MATCH";
@@ -45,8 +45,8 @@ public class EventNames {
 		public const string EXTENDED_TRACK_ON_SCAN = "EXTENDED_TRACK_ON_SCAN";
 		public const string EXTENDED_TRACK_REMOVED = "EXTENDED_TRACK_REMOVED";
 		public const string ON_SPAWN_CUBE = "ON_SPAWN_CUBE";
-        public const string ON_DESPAWN_CUBE = "ON_DESPAWN_CUBE";
-    }
+		public const string ON_DESPAWN_CUBE = "ON_DESPAWN_CUBE";
+	}
 
 	public class S18_Events {
 		public const string ON_FIRST_SCAN = "FIRST_TARGET_SCAN";
@@ -57,8 +57,22 @@ public class EventNames {
 	{
 		public const string ON_COMPONENT_MERGE = "ON_COMPONENT_MERGE";
 		public const string ON_COMPONENT_DIVIDE = "ON_COMPONENT_DIVIDE";
-	
+
 	}
+
+	public class Timer
+	{
+		public const string ON_TIMER_ELAPSE = "ON_TIMER_ELAPSE";
+	}
+
+	public class Game_Loop
+	{
+		public const string ON_STAGE_START = "ON_STAGE_START";
+		public const string ON_DAY_END = "ON_DAY_END";
+		public const string ON_DAY_START = "ON_DAY_START";
+		public const string ON_POTION_SUBMISSION = "ON_POTION_SUBMISSION";
+	}
+
 }
 
 

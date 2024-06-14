@@ -11,6 +11,8 @@ public class MergeComponent : MonoBehaviour
         Vector3 position = other.transform.position;
         ComponentBlueprint blueprint = ComponentDirector.Instance.getBlueprint();
 
+
+
         if (!ComponentDirector.Instance.isObjectInPool(dragged) || !ComponentDirector.Instance.isObjectInPool(other))
             return;
 

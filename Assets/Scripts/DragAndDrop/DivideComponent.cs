@@ -9,14 +9,15 @@ public class DivideComponent : MonoBehaviour
     public void processDivideComponents()
     {
         Vector3 position = currentObject.transform.position;
-        string currentComponentName = currentObject.GetComponent<ComponentScript>().Data.ComponentName;
+
 
         ComponentData data = currentObject.GetComponent<ComponentScript>().Data;
 
         //If the player tries to divide a base component
-        if(data.ComponentA == null || data.ComponentB == null)
+        if (data == null || data.ComponentA == null || data.ComponentB == null)
             return;
-        
+
+        string currentComponentName = currentObject.GetComponent<ComponentScript>().Data.ComponentName;
         string componentAName = data.ComponentA.ComponentName;
         string componentBName = data.ComponentB.ComponentName;
     
@@ -48,11 +49,6 @@ public class DivideComponent : MonoBehaviour
 
         currentObject = null;
         return false;
-    }
-
-    private void Awake()
-    {
-
     }
 
     private void Update()

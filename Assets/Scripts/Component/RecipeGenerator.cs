@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-public static  class RecipeGenerator {
+public static class RecipeGenerator {
 
     /*
        Balancing Spreadsheet:
@@ -55,7 +55,7 @@ public static  class RecipeGenerator {
 
 
 
-    public static List<string> createIncorrectRecipe(ComponentBlueprint blueprint, List<string> correctRecipe, int difficulty)
+    public static List<string> CreateIncorrectRecipe(ComponentBlueprint blueprint, List<string> correctRecipe, int difficulty)
     {
         List<string> newList = new List<string>(correctRecipe);
 
@@ -189,28 +189,15 @@ public static  class RecipeGenerator {
         return newList;
     }
 
-    public static void checkPotionContents(GameObject dropOrigin, List<string> correctRecipe)
-    {    
-        if (dropOrigin.transform.childCount > 0)
-        {
-            bool match = RecipeGenerator.crosscheckRecipe(dropOrigin, correctRecipe);
-            if (match)
-            {
-                Debug.Log("NO impurities found.");
-            }
-            else
-            {
-                Debug.Log("impurities FOUND.");
-            }
-        }
-    }
+  
+   
 
-    private static bool crosscheckRecipe(GameObject dropOrigin, List<string> correctRecipe)
+    public static bool crosscheckRecipe(GameObject workArea, List<string> correctRecipe, out float percentageCompletion)
     {
 
         List<string> contentNames = new List<string>();
 
-        foreach (Transform child in dropOrigin.transform)
+        foreach (Transform child in workArea.transform)
         {
             ComponentData data = child.transform.gameObject.GetComponent<ComponentScript>()?.Data;
 
@@ -233,7 +220,11 @@ public static  class RecipeGenerator {
             }
         }
 
+        percentageCompletion = (float)(contentNames.Count - temp.Count) / correctRecipe.Count;
+
         return contentNames.Count == correctRecipe.Count && temp.Count == 0;
     }
+
+
 
 }

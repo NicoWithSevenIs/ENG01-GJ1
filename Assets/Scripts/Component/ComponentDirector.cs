@@ -1,65 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ComponentDirector : MonoBehaviour
 {
-    [Range(1,10)]
-    [SerializeField] private int Difficulty = 5;
-    [SerializeField] private GameObject dropOrigin;
 
 
     [SerializeField] private ComponentBuilder builder;
 
-    [SerializeField] private List<string> correctRecipe;
-    [SerializeField] private List<string> incorrectRecipe;
-
-
     [Header("Object Pooling")]
 
     [SerializeField] private List<GameObject> componentPool;
-    [SerializeField] private Transform poolableContainer;
 
+    [Header("Containers")]
+    [SerializeField] private Transform poolableContainer;
+    [SerializeField] private GameObject workAreaContainer;
+
+    public GameObject WorkAreaContainer { get { return workAreaContainer; } }
 
     private void Start()
     {
         componentPool = new List<GameObject>();
+
         if (this.poolableContainer == null)
             throw new System.Exception("Object Pooling needs a container");
-
+        if (this.workAreaContainer == null)
+            throw new System.Exception("Active Components need a container");
     }
 
-    public GameObject MakeComponent(string componentName)
-    {
-        return builder.createComponent(componentName, null);
-    }
 
     public ComponentBlueprint getBlueprint()
     {
         return builder.Blueprint;
     }
 
-    public void ProcessStage(int difficulty)
+    public void ProcessStage(int difficulty, List<string> incorrectRecipe)
     {
-
+        
         foreach (var component in componentPool)
             Destroy(component);
         componentPool.Clear();
-
-        correctRecipe.Clear();
-        incorrectRecipe.Clear();
-
-        correctRecipe = RecipeGenerator.CreateRecipe(builder.Blueprint, difficulty);
-        incorrectRecipe = RecipeGenerator.createIncorrectRecipe(builder.Blueprint, correctRecipe, difficulty);
-
-        string s = "";
-        foreach(var c in correctRecipe)
-        {
-            s += c + " ";
-        }
-        Debug.Log("Correct Recipe: " + s);
-
-
 
         foreach (var componentName in incorrectRecipe)
         {
@@ -73,16 +54,11 @@ public class ComponentDirector : MonoBehaviour
 
     }
 
-    private void Update()
+    public void setComponentsEditable(bool flag)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        foreach(var component in componentPool)
         {
-            ProcessStage(this.Difficulty);
-        }
-
-        if (this.correctRecipe != null)
-        {
-            RecipeGenerator.checkPotionContents(this.dropOrigin, this.correctRecipe);
+            component.GetComponent<ComponentScript>().enabled = flag;
         }
     }
 
@@ -103,11 +79,8 @@ public class ComponentDirector : MonoBehaviour
 
 
             if (data.ComponentName == componentName && !componentInstance.activeInHierarchy)
-            {
                 poolable = componentInstance;
-
-            }
-
+         
         }
 
         if (poolable == null)
@@ -126,7 +99,7 @@ public class ComponentDirector : MonoBehaviour
         if (poolable != null)
         {
             poolable.SetActive(true);
-            poolable.transform.parent = dropOrigin.transform;
+            poolable.transform.parent = workAreaContainer.transform;
         }
             
 
@@ -173,7 +146,6 @@ public class ComponentDirector : MonoBehaviour
         if(Instance == null)
             Instance = this;
         else Destroy(this.gameObject);
-
     }
 
     #endregion
