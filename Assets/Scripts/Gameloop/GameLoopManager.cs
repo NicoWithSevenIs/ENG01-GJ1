@@ -37,6 +37,7 @@ public class GameLoopManager : MonoBehaviour
         this.dailyProfit = 0f;
         this.dailyQuota = 500 * quotaMultiplier;
         EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_DAY_START);
+        EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
     }
 
     private void DeconstructPotion()
@@ -84,18 +85,19 @@ public class GameLoopManager : MonoBehaviour
         if(currentHour < maxWorkHour)
         {
             currentHour++;
-            
-            //loop through potion
+
+            //go through the next stage
+            EventBroadcaster.Instance.PostEvent(EventNames.Game_Loop.ON_STAGE_START);
         }
         else
         {
             currentHour = 0;
-            this.OnDayEnd();
+            this.EndDay();
         }
         
     }
 
-    private void OnDayEnd()
+    private void EndDay()
     {
 
         if(dailyProfit < dailyQuota)
@@ -108,6 +110,9 @@ public class GameLoopManager : MonoBehaviour
         //temp
         difficulty += Mathf.Clamp(UnityEngine.Random.Range(1/difficulty, 3), 1, 10);
         this.daysWorking++;
+
+        //trigger next day sequence which calls start day
+        
     }
 
 
