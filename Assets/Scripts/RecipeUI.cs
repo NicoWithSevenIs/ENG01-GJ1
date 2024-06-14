@@ -118,7 +118,7 @@ public class RecipeUI : MonoBehaviour
 
         foreach (GameObject componentDisplay in componentDisplays)
         {
-            //recipeSheet.GetComponent<Image>().overrideSprite = componentDisplay.GetComponent<RawImage>();
+            //recipeSheet.GetComponent<Image>().overrideSprite = (Sprite) componentDisplay.GetComponent<RawImage>();
         }
     }
 
@@ -139,4 +139,5 @@ public class RecipeUI : MonoBehaviour
     {
         this.componentDisplays.Clear();
     }
+
 }
